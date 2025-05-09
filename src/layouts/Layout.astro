@@ -1,0 +1,50 @@
+---
+import Header from "../components/layout/Header.astro";
+import Footer from "../components/layout/Footer.astro";
+import SidePanel from "../components/layout/SidePanel.astro";
+
+import "../styles/global.css";
+
+type Props = {
+  title: string;
+  description: string;
+  links?: {
+    text: string;
+    href: string;
+    external?: boolean;
+  }[];
+};
+---
+
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>終端機風格網站</title>
+  </head>
+  <body>
+    <div
+      class="bg-terminal-primary text-terminal-secondary divide-terminal-secondary flex min-h-screen flex-col divide-y-2 divide-dashed font-mono"
+    >
+      <!-- Header -->
+      <Header />
+
+      <!-- Main Content -->
+      <div
+        class="divide-terminal-secondary flex grow flex-col divide-y-2 divide-dashed md:flex-row md:divide-x-2 md:divide-y-0"
+      >
+        <!-- Left Panel -->
+        {Astro.props.links && <SidePanel links={Astro.props.links} />}
+
+        <!-- Right Panel -->
+        <main class="w-full overflow-y-auto p-6 md:w-4/5">
+          <slot />
+        </main>
+      </div>
+
+      <!-- Footer -->
+      <Footer />
+    </div>
+  </body>
+</html>

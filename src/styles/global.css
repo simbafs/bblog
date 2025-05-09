@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+:root {
+  --terminal-primary: hsl(96, 50%, 90%);
+  --terminal-secondary: hsl(96, 50%, 10%);
+  --terminal-tertiary: hsl(156, 80%, 20%);
+  --terminal-accent: hsl(36, 80%, 20%);
+}
+
+[data-theme="dark"] {
+  --terminal-primary: hsl(96, 50%, 10%);
+  --terminal-secondary: hsl(96, 50%, 90%);
+  --terminal-tertiary: hsl(156, 80%, 80%);
+  --terminal-accent: hsl(36, 80%, 80%);
+}
+
+/* body[data-theme='dark']{ */
+/*     font-size: 100px; */
+/**/
+/* } */
+
+@theme inline {
+  --color-terminal-primary: var(--terminal-primary);
+  --color-terminal-secondary: var(--terminal-secondary);
+  --color-terminal-tertiary: var(--terminal-tertiary);
+  --color-terminal-accent: var(--terminal-accent);
+}

@@ -1,0 +1,91 @@
+<!-- NOTE: script 放前面是為了避免 <body> 上的 divide class 在 <footer> 最後面在加上 border，因為 CSS 會認為 <footer> 不是最後一個元素 -->
+<script>
+  class RandomWalker {
+    value: number;
+    rate: number;
+    upper: number;
+    lower: number;
+    element: HTMLElement | null;
+    render: (rw: RandomWalker) => string;
+
+    constructor(
+      value: number,
+      rate: number,
+      upper: number,
+      lower: number,
+      render: (rw: RandomWalker) => string,
+      element: HTMLElement | null,
+    ) {
+      this.value = value;
+      this.rate = rate;
+      this.upper = upper;
+      this.lower = lower;
+      this.element = element;
+      this.render = render;
+    }
+
+    update() {
+      this.value += ((Math.random() - 0.5) / 0.5) * this.rate;
+      if (this.value > this.upper) this.value = this.upper;
+      if (this.value < this.lower) this.value = this.lower;
+
+      if (this.element) {
+        this.element.textContent = this.render(this);
+      }
+    }
+  }
+
+  const cpuEle = document.getElementById("cpu");
+  const memEle = document.getElementById("mem");
+  const loadEle = document.getElementById("load");
+
+  let now = new Date();
+  const cpu = new RandomWalker(
+    3,
+    5,
+    40,
+    10,
+    (rw) => `${rw.value.toFixed(0)}%`,
+    cpuEle,
+  );
+  const mem = new RandomWalker(
+    512,
+    128,
+    3192,
+    1024,
+    (rw) => `${rw.value.toFixed(0)}MB / 4096MB`,
+    memEle,
+  );
+  const load = new RandomWalker(
+    0.12,
+    0.5,
+    0.8,
+    0.01,
+    (rw) => rw.value.toFixed(2),
+    loadEle,
+  );
+
+  function update() {
+    now = new Date();
+    cpu.update();
+    mem.update();
+    load.update();
+
+    const timeEle = document.getElementById("current-time");
+    if (timeEle) {
+      timeEle.textContent = now.toLocaleTimeString();
+    }
+  }
+
+  setInterval(update, 1000);
+</script>
+<footer
+  class="flex flex-col items-center justify-between p-2 text-sm sm:flex-row"
+>
+  <div id="current-time" class="font-bold">--:--:--</div>
+  <div class="text-terminal-accent *:text-terminal-secondary font-bold">
+    CPU: <span id="cpu">3%</span> Mem:
+    <span id="mem">512MB / 4096MB</span>
+    Load: <span id="load">0.12</span>
+  </div>
+</footer>
