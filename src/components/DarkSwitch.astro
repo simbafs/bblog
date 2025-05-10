@@ -10,7 +10,7 @@
     >
       <!-- mingcute:sun-line -->
       <svg
-        class="hidden h-5 w-5 in-[[data-theme=dark]]:block"
+        class="hidden h-5 w-5 dark:block"
         width="22"
         height="22"
         viewBox="0 0 24 24"
@@ -28,7 +28,7 @@
 
       <!-- mingcute:moon-stars-line -->
       <svg
-        class="block h-5 w-5 in-[[data-theme=dark]]:hidden"
+        class="block h-5 w-5 dark:hidden"
         width="22"
         height="22"
         viewBox="0 0 24 24"
@@ -53,17 +53,17 @@
   // 初次載入時讀取 localStorage
   const storedTheme = localStorage.getItem("theme");
   if (storedTheme === "dark") {
-    html.setAttribute("data-theme", "dark");
+    html.classList.add("dark");
     if (dark) dark.checked = true;
   }
 
   // 監聽切換事件
   dark?.addEventListener("change", () => {
     if (dark.checked) {
-      html.setAttribute("data-theme", "dark");
+      html.classList.add("dark");
       localStorage.setItem("theme", "dark");
     } else {
-      html.removeAttribute("data-theme");
+      html.classList.remove("dark");
       localStorage.removeItem("theme");
     }
   });
