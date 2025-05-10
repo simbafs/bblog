@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 :root {
   --terminal-primary: hsl(96, 50%, 90%);
@@ -13,11 +14,6 @@
   --terminal-tertiary: hsl(156, 80%, 80%);
   --terminal-accent: hsl(36, 80%, 80%);
 }
-
-/* body[data-theme='dark']{ */
-/*     font-size: 100px; */
-/**/
-/* } */
 
 @theme inline {
   --color-terminal-primary: var(--terminal-primary);

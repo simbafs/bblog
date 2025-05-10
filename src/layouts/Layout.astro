@@ -4,6 +4,7 @@ import Footer from "../components/layout/Footer.astro";
 import SidePanel from "../components/layout/SidePanel.astro";
 
 import "../styles/global.css";
+import { cn } from "../lib/cn";
 
 type Props = {
   title: string;
@@ -13,6 +14,7 @@ type Props = {
     href: string;
     external?: boolean;
   }[];
+  className?: string;
 };
 ---
 
@@ -32,7 +34,10 @@ type Props = {
 
       <!-- Main Content -->
       <div
-        class="divide-terminal-secondary flex grow flex-col divide-y-2 divide-dashed md:flex-row md:divide-x-2 md:divide-y-0"
+        class={cn(
+          "divide-terminal-secondary flex grow flex-col divide-y-2 divide-dashed md:flex-row md:divide-x-2 md:divide-y-0",
+          Astro.props.className,
+        )}
       >
         <!-- Left Panel -->
         {Astro.props.links && <SidePanel links={Astro.props.links} />}
