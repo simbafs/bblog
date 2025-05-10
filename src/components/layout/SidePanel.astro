@@ -8,23 +8,35 @@ type Props = {
   cmd?: string;
 };
 
-const cmd = "$ " + Astro.props.cmd || "$ ls -l $(pwd)";
+const cmd = (Astro.props.cmd || "ls -l $(pwd)").replace(
+  "{}",
+  Astro.url.pathname.replace(/\/$/, ".md"),
+);
 ---
 
-<aside class="overflow-y-auto p-4">
-  <div class="mb-2">{cmd}</div>
-  <ul class="space-y-1">
-    {
-      Astro.props.links.map((link) => (
-        <li>
-          <a
-            class="hover:text-terminal-accent underline underline-offset-4 transition-all hover:underline-offset-1"
-            href={link.href}
-          >
-            {link.text}
-          </a>
-        </li>
-      ))
-    }
-  </ul>
+<!--
+BUG: 如果太多標題，下面的會顯示不出來
+TODO: 根據目前在畫面中的標題改變 TOC 
+-->
+<aside class="sticky top-0 z-10 hidden h-fit p-4 md:block">
+  <div>
+    <div class="mb-4 grid grid-cols-[1fr_auto] gap-2">
+      <p>$</p>
+      <p class="mb-2">{cmd}</p>
+    </div>
+    <ul class="space-y-1">
+      {
+        Astro.props.links.map((link) => (
+          <li>
+            <a
+              class="hover:text-terminal-accent underline underline-offset-4 transition-all hover:underline-offset-1"
+              href={link.href}
+            >
+              {link.text}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
 </aside>

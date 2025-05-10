@@ -2,17 +2,40 @@
 import type { CollectionEntry } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import FormattedDate from "../components/FormattedDate.astro";
+import type { MarkdownHeading } from "astro";
 
-type Props = CollectionEntry<"blog">["data"];
+type Blog = CollectionEntry<"blog">["data"];
 
-const { title, description, publishDate, updatedDate, heroImage, tags } =
-  Astro.props;
+interface Props extends Blog {
+  headings: MarkdownHeading[];
+}
+
+const {
+  title,
+  description,
+  publishDate,
+  updatedDate,
+  heroImage,
+  tags,
+  headings,
+} = Astro.props;
+
+const links = headings.map((heading) => {
+  return {
+    text: "#".repeat(heading.depth) + " " + heading.text,
+    href: `#${heading.slug}`,
+  };
+});
 ---
 
-<Layout title={title} description={description} links={[]} cmd="grep {} -e '#'">
-  <!-- TODO: Outline in links -->
+<Layout
+  title={title}
+  description={description}
+  links={links}
+  cmd="grep {} -e '#'"
+>
   <article>
-    <div class="w-full">
+    <div class="p-4">
       {
         heroImage && (
           <img
@@ -20,7 +43,7 @@ const { title, description, publishDate, updatedDate, heroImage, tags } =
             height={510}
             src={heroImage}
             alt=""
-            class="shadow-terminal-secondary mx-auto my-0 block rounded-2xl shadow-2xl"
+            class="shadow-terminal-secondary block rounded-2xl shadow-xl"
           />
         )
       }
@@ -44,7 +67,7 @@ const { title, description, publishDate, updatedDate, heroImage, tags } =
           tags && (
             <div class="flex flex-wrap justify-center gap-2">
               {tags.map((tag) => (
-                <span class='italic'>#{tag}</span>
+                <span class="italic">#{tag}</span>
                 // TODO: add link to tag page
               ))}
             </div>

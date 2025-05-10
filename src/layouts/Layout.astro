@@ -36,7 +36,7 @@ type Props = {
       <!-- Main Content -->
       <div
         class={cn(
-          "divide-terminal-secondary grid grow grid-cols-1 w-full md:grid-cols-[1fr_4fr] divide-y-2 divide-dashed md:divide-x-2 md:divide-y-0",
+          "divide-terminal-secondary grid grow grid-cols-1 w-full md:grid-cols-[1fr_4fr] divide-y-2 divide-dashed md:divide-x-2 md:divide-y-0 h-fit",
           { "md:grid-cols-1": !Boolean(Astro.props.links) },
           Astro.props.className,
         )}
