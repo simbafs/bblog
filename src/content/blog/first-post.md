@@ -2,6 +2,9 @@
 title: "First post"
 description: "Lorem ipsum dolor sit amet"
 publishDate: "Jul 08 2022"
+tags:
+  - post
+  - some tags
 heroImage: "/blog-placeholder-3.jpg"
 ---
 
