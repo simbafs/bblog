@@ -33,7 +33,11 @@ const links = headings.map((heading) => {
 ---
 
 <Layout title={title} description={description}>
-  <SidePanel links={links} cmd={`blog view --heading ${id}`} slot="side-panel" />
+  <SidePanel
+    links={links}
+    cmd={`blog view --heading ${id}`}
+    slot="side-panel"
+  />
   <article>
     <p>$ blog view {id}</p>
 

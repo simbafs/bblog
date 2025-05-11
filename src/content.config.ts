@@ -40,4 +40,4 @@ const legacy = defineCollection({
   }),
 });
 
-export const collections = { blog, legacy};
+export const collections = { blog, legacy };
