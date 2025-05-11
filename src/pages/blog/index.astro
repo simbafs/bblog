@@ -2,55 +2,18 @@
 import Layout from "../../layouts/Layout.astro";
 import { config } from "../../site.config";
 import { getCollection } from "astro:content";
-import FormattedDate from "../../components/FormattedDate.astro";
+import FileTreeElement from "../../components/FileTreeElement.astro";
 
 const posts = (await getCollection("blog")).sort(
   (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
 );
-
-// zip([1,2,3], [4,5,6]) = [1,4,2,5,3,6]
-function zip(...arrs: any[]) {
-  const maxLength = Math.max(...arrs.map((arr) => arr.length));
-  const result: any[] = [];
-  for (let i = 0; i < maxLength; i++) {
-    for (const arr of arrs) {
-      if (i < arr.length) {
-        result.push(arr[i]);
-      }
-    }
-  }
-  return result;
-}
 ---
 
 <Layout title="Blog" description={config.description}>
   <section>
     <p>$ tree /blog</p>
-    <div class="grid grid-cols-[4rem_1fr]">
-      {
-        zip(
-          posts.map((_, index) => (
-            <div class="group mr-2 grid grid-cols-2 grid-rows-[1rem_1fr]">
-              <div class="border-r-terminal-secondary border-r-2" />
-              <div class="border-b-terminal-secondary border-b-2" />
-              {index === posts.length - 1 ? (
-                <div />
-              ) : (
-                <div class="border-r-terminal-secondary border-r-2" />
-              )}
-              <div />
-            </div>
-          )),
-          posts.map((post) => (
-            <a href={`/blog/${post.id}/`}>
-              <h4 class="title">{post.data.title}</h4>
-              <p class="date">
-                <FormattedDate date={post.data.publishDate} />
-              </p>
-            </a>
-          )),
-        )
-      }
+    <div>
+      {posts.map((post, index) => <FileTreeElement {...post} isLast={index == posts.length-1}/>)}
     </div>
   </section>
 </Layout>
