@@ -1,0 +1,31 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import TreeElement from "../../components/TreeElement.astro";
+import SidePanel from "../../components/layout/SidePanel.astro";
+import PostPreview from "../../components/PostPreview.astro";
+import * as content from "../../lib/content";
+import { config } from "../../site.config";
+
+const posts = await content.getPosts("legacy");
+
+const links = content.years(posts).map((year) => ({
+  href: `/legacy/${year}/`,
+  text: `${year}`,
+}));
+---
+
+<Layout title="Blog" description={config.description}>
+  <SidePanel links={links} slot="side-panel" cmd={`blog list --legacy --years`} />
+  <section>
+    <p>$ blog tree --legacy</p>
+    <div>
+      {
+        posts.map((post, index) => (
+          <TreeElement isLast={index == posts.length - 1}>
+            <PostPreview {...post} />
+          </TreeElement>
+        ))
+      }
+    </div>
+  </section>
+</Layout>

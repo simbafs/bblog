@@ -5,7 +5,9 @@ import {
 } from "astro:content";
 
 // 踢掉 `collection` 屬性，這樣只要有一樣的 schema 就都可以用`
-export type Post = Omit<CollectionEntry<"blog">, "collection">;
+export type Post = Omit<CollectionEntry<"blog">, "collection"> & {
+  collection: string;
+};
 
 export async function getPosts(collectionKey: CollectionKey): Promise<Post[]> {
   const collections = await getCollection(collectionKey);

@@ -1,11 +1,12 @@
 ---
 type Props = {
   tag: string;
+  legacy?: boolean;
 };
 
-const { tag } = Astro.props;
+const { tag, legacy } = Astro.props;
 ---
 
 <span class="italic">
-  <a href={`/tag/${tag}/`}>#{tag}</a>
+  <a href={`/${legacy ? 'legacy/tag' : 'tag'}/${tag}/`}>#{tag}</a>
 </span>

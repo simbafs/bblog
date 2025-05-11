@@ -1,7 +1,7 @@
 ---
 title: Bitbucket Connect Jira
-publishDate: '2022-07-20'
-description: ''
+publishDate: "2022-07-20"
+description: ""
 tags:
   - git
   - atlassian

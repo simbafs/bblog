@@ -1,0 +1,57 @@
+---
+import { type GetStaticPaths } from "astro";
+
+import TreeElement from "../../components/TreeElement.astro";
+import SidePanel from "../../components/layout/SidePanel.astro";
+import PostPreview from "../../components/PostPreview.astro";
+import Layout from "../../layouts/Layout.astro";
+import { config } from "../../site.config";
+import * as content from "../../lib/content";
+
+export const prerender = true;
+
+export const getStaticPaths = (async () => {
+  const years = await content.getPosts("legacy").then(content.years);
+
+  return years.map((year) => ({
+    params: { year },
+    props: { years },
+  }));
+}) satisfies GetStaticPaths;
+
+const { year } = Astro.params;
+const { years } = Astro.props;
+
+const filterByYear = (year: number) => (post: content.Post) => {
+  return post.data.publishDate.getFullYear() === Number(year);
+};
+
+const posts = await content
+  .getPosts("legacy")
+  .then((posts) => posts.filter(filterByYear(year)));
+
+const links = years.map((year) => ({
+  href: `/legacy/${year}/`,
+  text: `${year}`,
+}));
+---
+
+<Layout title={`Legacy Blog in ${year}`} description={config.description}>
+  <SidePanel
+    links={links}
+    slot="side-panel"
+    cmd={`blog list --legacy --years`}
+  />
+  <section>
+    <p>$ blog tree --legacy --year {year}</p>
+    <div>
+      {
+        posts.map((post, index) => (
+          <TreeElement isLast={index == posts.length - 1}>
+            <PostPreview {...post} />
+          </TreeElement>
+        ))
+      }
+    </div>
+  </section>
+</Layout>

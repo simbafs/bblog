@@ -11,6 +11,7 @@ type Blog = CollectionEntry<"blog">["data"];
 interface Props extends Blog {
   headings: MarkdownHeading[];
   id: string;
+  legacy?: boolean
 }
 
 const {
@@ -22,6 +23,7 @@ const {
   tags,
   headings,
   id,
+  legacy,
 } = Astro.props;
 
 const links = headings.map((heading) => {
@@ -74,7 +76,7 @@ const links = headings.map((heading) => {
           tags && (
             <div class="flex flex-wrap justify-center gap-2">
               {tags.map((tag) => (
-                <Tag tag={tag} />
+          <Tag tag={tag} legacy={legacy} />
               ))}
             </div>
           )

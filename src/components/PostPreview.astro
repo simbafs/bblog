@@ -6,14 +6,18 @@ import { type Post } from "../lib/content";
 type Props = Post;
 ---
 
-<a href={`/blog/${Astro.props.id}/`}>
+<a href={`/${Astro.props.collection}/${Astro.props.id}/`}>
   <h4 class="font-bold">{Astro.props.data.title}</h4>
   <p class="date text-terminal-tertiary">
     <FormattedDate date={Astro.props.data.publishDate} />
   </p>
 </a>
 <div class="flex gap-2 italic">
-  {Astro.props.data.tags.map((tag) => <Tag tag={tag} />)}
+  {
+    Astro.props.data.tags.map((tag) => (
+      <Tag tag={tag} legacy={Astro.props.collection == "legacy"} />
+    ))
+  }
 </div>
 <p class="text-terminal-secondary text-sm">
   {Astro.props.data.description}

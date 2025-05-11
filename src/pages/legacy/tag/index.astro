@@ -1,0 +1,29 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import TreeElement from "../../../components/TreeElement.astro";
+import { config } from "../../../site.config";
+import * as content from "../../../lib/content";
+
+const tags = await content.getPosts("legacy").then(content.countTags);
+---
+
+<!-- TODO: 時間上這個標籤的文章分佈 -->
+<Layout title="Blog" description={config.description}>
+  <section>
+    <p>$ blog tree --legacy --tag</p>
+    <div>
+      {
+        tags.map(([tag, count], index) => (
+          <TreeElement isLast={index == tags.length - 1} density="compact">
+            <a href={`/tag/${tag}/`}>
+              <h4 class="inline font-bold italic">#{tag}</h4>
+              <p class="text-terminal-tertiary inline text-sm">
+                {count} post{count > 1 ? "s" : ""}
+              </p>
+            </a>
+          </TreeElement>
+        ))
+      }
+    </div>
+  </section>
+</Layout>
