@@ -3,17 +3,31 @@ import Layout from "../../layouts/Layout.astro";
 import { config } from "../../site.config";
 import { getCollection } from "astro:content";
 import FileTreeElement from "../../components/FileTreeElement.astro";
+import SidePanel from "../../components/layout/SidePanel.astro";
 
 const posts = (await getCollection("blog")).sort(
   (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
 );
+
+const years = [
+  ...new Set(posts.map((post) => post.data.publishDate.getFullYear())),
+].sort((a, b) => b - a);
+const links = years.map((year) => ({
+  href: `/blog/${year}/`,
+  text: `${year}`,
+}));
 ---
 
 <Layout title="Blog" description={config.description}>
+  <SidePanel links={links} slot="side-panel" cmd={`ls /blog/ | years`} />
   <section>
     <p>$ tree /blog</p>
     <div>
-      {posts.map((post, index) => <FileTreeElement {...post} isLast={index == posts.length-1}/>)}
+      {
+        posts.map((post, index) => (
+          <FileTreeElement {...post} isLast={index == posts.length - 1} />
+        ))
+      }
     </div>
   </section>
 </Layout>
