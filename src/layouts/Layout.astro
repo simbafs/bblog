@@ -37,16 +37,18 @@ type Props = {
       <div
         class={cn(
           "divide-terminal-secondary grid grow grid-cols-1 w-full md:grid-cols-[1fr_4fr] divide-y-2 divide-dashed md:divide-x-2 md:divide-y-0 h-fit",
-          { "md:grid-cols-1": !Boolean(Astro.props.links) },
+          { "divide-none": !Boolean(Astro.props.links) },
           Astro.props.className,
         )}
       >
         <!-- Left Panel -->
-        {
-          Astro.props.links && (
-            <SidePanel links={Astro.props.links} cmd={Astro.props.cmd} />
-          )
-        }
+        <div>
+          {
+            Astro.props.links && (
+              <SidePanel links={Astro.props.links} cmd={Astro.props.cmd} />
+            )
+          }
+        </div>
 
         <!-- Right Panel -->
         <main class="overflow-y-auto p-6">
