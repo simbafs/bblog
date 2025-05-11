@@ -1,17 +1,18 @@
 ---
 import Tag from "./Tag.astro";
 import FormattedDate from "./FormattedDate.astro";
+import A from "./A.astro";
 import { type Post } from "../lib/content";
 
 type Props = Post;
 ---
 
-<a href={`/${Astro.props.collection}/${Astro.props.id}/`}>
+<A href={`/${Astro.props.collection}/${Astro.props.id}/`}>
   <h4 class="font-bold">{Astro.props.data.title}</h4>
   <p class="date text-terminal-tertiary">
     <FormattedDate date={Astro.props.data.publishDate} />
   </p>
-</a>
+</A>
 <div class="flex gap-2 italic">
   {
     Astro.props.data.tags.map((tag) => (

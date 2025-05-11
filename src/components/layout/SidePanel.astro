@@ -1,4 +1,5 @@
 ---
+import A from "../A.astro";
 type Props = {
   links: {
     text: string;
@@ -28,12 +29,12 @@ TODO: 根據目前在畫面中的標題改變 TOC
       {
         Astro.props.links.map((link) => (
           <li>
-            <a
+            <A
               class="hover:text-terminal-accent underline underline-offset-4 transition-all hover:underline-offset-1"
               href={link.href}
             >
               {link.text}
-            </a>
+            </A>
           </li>
         ))
       }

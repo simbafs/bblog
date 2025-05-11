@@ -11,7 +11,8 @@ import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://example.com",
+  site: "https://simbafs.github.io/bblog",
+  base: "/bblog",
   integrations: [mdx(), sitemap(), pagefind()],
 
   vite: {

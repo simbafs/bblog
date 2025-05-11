@@ -1,0 +1,11 @@
+---
+import { type HTMLAttributes } from "astro/types";
+import { base } from "astro:config/client";
+
+type Props = HTMLAttributes<"a">;
+const { href, ...props } = Astro.props;
+
+const link = String(href).replace(/^\//, "");
+---
+
+<a href={`${base}/${link}`} {...props}><slot /></a>

@@ -1,18 +1,21 @@
 ---
 import type { HTMLAttributes } from "astro/types";
+import { base } from "astro:config/client";
+
+import A from "../A.astro";
 
 type Props = HTMLAttributes<"a">;
 
 const { href, class: className, ...props } = Astro.props;
-const paths = Astro.url.pathname.split("/").filter(Boolean);
+const paths = Astro.url.pathname.replace(base, "").split("/").filter(Boolean);
 const h = String(href).replaceAll("/", "");
 const isActive = paths[0] === h || Astro.url.pathname === href;
 ---
 
-<a
+<A
   href={href}
   class:list={[
-    "hover:text-terminal-accent text-lg transition-all",
+    "hover:text-terminal-accent text-lg font-bold transition-all",
     className,
     { active: isActive },
     { "text-terminal-accent": isActive },
@@ -20,12 +23,4 @@ const isActive = paths[0] === h || Astro.url.pathname === href;
   {...props}
 >
   <slot />
-</a>
-<style>
-  a {
-    display: inline-block;
-  }
-  a.active {
-    font-weight: bolder;
-  }
-</style>
+</A>
