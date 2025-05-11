@@ -1,9 +1,16 @@
 ---
-import { type CollectionEntry } from "astro:content";
+import { cn } from "../lib/cn";
 
-type Props = CollectionEntry<"blog"> & {
+type Props = {
   isLast?: boolean;
+  density?: "compact" | "comfortable" | "loose";
 };
+
+const gap = {
+  compact: "mb-2",
+  comfortable: "mb-4",
+  loose: "mb-6",
+}[Astro.props.density || "comfortable"];
 ---
 
 <div class="group flex">
@@ -19,7 +26,7 @@ type Props = CollectionEntry<"blog"> & {
     }
     <div></div>
   </div>
-  <div class="mb-4 w-full">
+  <div class={cn("mb-4 w-full", gap)}>
     <slot />
   </div>
 </div>

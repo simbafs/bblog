@@ -1,0 +1,35 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import TreeElement from "../../components/TreeElement.astro";
+import PostPreview from "../../components/PostPreview.astro";
+
+import type { GetStaticPaths } from "astro";
+import { countTags, getPostsInTag } from "../../lib/content";
+import { config } from "../../site.config";
+
+export const getStaticPaths = (async () => {
+  const tags = await countTags("blog");
+  return tags.map(([tag]) => ({
+    params: { tag },
+  }));
+}) satisfies GetStaticPaths;
+
+const { tag } = Astro.params;
+
+const posts = await getPostsInTag(tag, "blog");
+---
+
+<Layout title={tag} description={config.description}>
+  <section>
+    <p>$ blog --tag {tag}</p>
+    <div>
+      {
+        posts.map((post, index) => (
+          <TreeElement isLast={index === posts.length - 1}>
+            <PostPreview {...post} />
+          </TreeElement>
+        ))
+      }
+    </div>
+  </section>
+</Layout>

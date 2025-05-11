@@ -1,0 +1,29 @@
+---
+import { countTags } from "../../lib/content.ts";
+import Layout from "../../layouts/Layout.astro";
+import TreeElement from "../../components/TreeElement.astro";
+import { config } from "../../site.config";
+
+const tags = await countTags("blog");
+---
+
+<Layout title="Blog" description={config.description}>
+  <section>
+    <p>$ blog --tags --descend</p>
+    <div>
+      {
+        tags.map(([tag, count], index) => (
+          <TreeElement isLast={index == tags.length - 1} density="compact">
+            <a href={`/tag/${tag}/`}>
+              <h4 class="inline font-bold">{tag}</h4>
+              <p class="text-terminal-secondary inline text-sm">
+                {count} post{count > 1 ? "s" : ""}
+              </p>
+              <!-- TODO: 時間上這個標籤的文章分佈 -->
+            </a>
+          </TreeElement>
+        ))
+      }
+    </div>
+  </section>
+</Layout>
