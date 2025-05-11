@@ -1,20 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import SidePanel from "../components/layout/SidePanel.astro";
 import { config } from "../site.config";
 ---
 
 <Layout title={config.title} description={config.description}>
-  <SidePanel
-    slot="side-panel"
-    cmd="welcome"
-    links={[
-      { text: "Home", href: "/" },
-      { text: "Blog", href: "/blog/" },
-      { text: "Tags", href: "/tag/" },
-      { text: "Legacy", href: "/legacy/" },
-    ]}
-  />
   <h1 class="mb-4 text-2xl">網頁內容區塊</h1>
   <p>
     這裡是終端機風格的主要內容展示區域，你可以放文章、圖片、或任何你想要的內容。

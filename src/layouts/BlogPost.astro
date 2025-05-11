@@ -11,7 +11,7 @@ type Blog = CollectionEntry<"blog">["data"];
 interface Props extends Blog {
   headings: MarkdownHeading[];
   id: string;
-  legacy?: boolean
+  legacy?: boolean;
 }
 
 const {
@@ -59,6 +59,7 @@ const links = headings.map((heading) => {
     <!-- TODO: use my color palette -->
     <div
       class="prose prose-img:rounded-lg dark:prose-invert md:prose-lg mx-auto my-0 w-[720px] max-w-[calc(100%-2em)] p-4"
+      data-pagefind-body
     >
       <div class="mt-8 mb-4 py-4 text-center">
         <h1>{title}</h1>
@@ -76,7 +77,7 @@ const links = headings.map((heading) => {
           tags && (
             <div class="flex flex-wrap justify-center gap-2">
               {tags.map((tag) => (
-          <Tag tag={tag} legacy={legacy} />
+                <Tag tag={tag} legacy={legacy} />
               ))}
             </div>
           )

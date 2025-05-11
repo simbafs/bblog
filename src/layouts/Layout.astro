@@ -10,13 +10,14 @@ type Props = {
   title: string;
   description: string;
   className?: string;
+  hideSidePanel?: boolean;
 };
 
-const { title, description, className } = Astro.props as Props;
+const { title, description, className, hideSidePanel } = Astro.props as Props;
 ---
 
 <!doctype html>
-<html lang="zh-Hant">
+<html lang="zh-tw">
   <head>
     <BaseHead title={title} description={description} />
   </head>
@@ -30,15 +31,23 @@ const { title, description, className } = Astro.props as Props;
       <!-- Main Content -->
       <div
         class={cn(
-          "divide-terminal-secondary grid grow grid-rows-[auto_1fr] md:grid-rows-1 w-full md:grid-cols-[1fr_4fr] divide-y-2 divide-dashed md:divide-x-2 md:divide-y-0 h-fit",
+          "grow h-fit",
+          {
+            "divide-terminal-secondary grid grid-rows-[auto_1fr] md:grid-rows-1 w-full md:grid-cols-[1fr_4fr] divide-y-2 divide-dashed md:divide-x-2 md:divide-y-0":
+              !hideSidePanel,
+          },
           { "divide-none": !Astro.slots.has("side-panel") },
           className,
         )}
       >
         <!-- Left Panel -->
-        <div>
-          <slot name="side-panel" />
-        </div>
+        {
+          !hideSidePanel && (
+            <div>
+              <slot name="side-panel" />
+            </div>
+          )
+        }
 
         <!-- Right Panel -->
         <main class="overflow-y-auto p-6">
