@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import Layout from "../layouts/Layout.astro";
+import SidePanel from "../components/layout/SidePanel.astro";
 import FormattedDate from "../components/FormattedDate.astro";
 import type { MarkdownHeading } from "astro";
 
@@ -28,12 +29,8 @@ const links = headings.map((heading) => {
 });
 ---
 
-<Layout
-  title={title}
-  description={description}
-  links={links}
-  cmd="grep {} -e '#'"
->
+<Layout title={title} description={description}>
+  <SidePanel links={links} cmd="grep {} -e '#'" slot="side-panel" />
   <article>
     <div class="p-4">
       {

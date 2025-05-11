@@ -1,4 +1,5 @@
 ---
+import BaseHead from "../components/layout/BaseHead.astro";
 import Header from "../components/layout/Header.astro";
 import Footer from "../components/layout/Footer.astro";
 import SidePanel from "../components/layout/SidePanel.astro";
@@ -9,12 +10,6 @@ import { cn } from "../lib/cn";
 type Props = {
   title: string;
   description: string;
-  links?: {
-    text: string;
-    href: string;
-    external?: boolean;
-  }[];
-  cmd?: string;
   className?: string;
 };
 ---
@@ -22,9 +17,7 @@ type Props = {
 <!doctype html>
 <html lang="zh-Hant">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>終端機風格網站</title>
+    <BaseHead title={Astro.props.title} description={Astro.props.description} />
   </head>
   <body class="bg-terminal-primary text-terminal-secondary">
     <div
@@ -36,18 +29,14 @@ type Props = {
       <!-- Main Content -->
       <div
         class={cn(
-          "divide-terminal-secondary grid grow grid-cols-1 w-full md:grid-cols-[1fr_4fr] divide-y-2 divide-dashed md:divide-x-2 md:divide-y-0 h-fit",
-          { "divide-none": !Boolean(Astro.props.links) },
+          "divide-terminal-secondary grid grow grid-rows-[auto_1fr] md:grid-rows-1 w-full md:grid-cols-[1fr_4fr] divide-y-2 divide-dashed md:divide-x-2 md:divide-y-0 h-fit",
+          { "divide-none": !Astro.slots.has("side-panel") },
           Astro.props.className,
         )}
       >
         <!-- Left Panel -->
         <div>
-          {
-            Astro.props.links && (
-              <SidePanel links={Astro.props.links} cmd={Astro.props.cmd} />
-            )
-          }
+          <slot name="side-panel" />
         </div>
 
         <!-- Right Panel -->
