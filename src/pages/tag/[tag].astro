@@ -1,35 +1,41 @@
 ---
+import type { GetStaticPaths } from "astro";
+
 import Layout from "../../layouts/Layout.astro";
 import TreeElement from "../../components/TreeElement.astro";
 import PostPreview from "../../components/PostPreview.astro";
-
-import type { GetStaticPaths } from "astro";
-import { countTags, getPostsInTag } from "../../lib/content";
+import SidePanel from "../../components/layout/SidePanel.astro";
+import * as content from "../../lib/content";
 import { config } from "../../site.config";
 
 export const getStaticPaths = (async () => {
-  const tags = await countTags("blog");
+  const tags = await content.getPosts("blog").then(content.countTags);
   return tags.map(([tag]) => ({
     params: { tag },
+    props: { tags },
   }));
 }) satisfies GetStaticPaths;
 
 const { tag } = Astro.params;
+const { tags } = Astro.props;
 
-const posts = await getPostsInTag(tag, "blog");
+const posts = await content.getPosts("blog").then(content.inTag(tag));
+const links = tags.map((tag) => ({
+  href: `/tag/${tag[0]}/`,
+  text: `#${tag[0]}`,
+}));
 ---
 
 <Layout title={tag} description={config.description}>
-  <section>
-    <p>$ blog --tag {tag}</p>
-    <div>
-      {
-        posts.map((post, index) => (
-          <TreeElement isLast={index === posts.length - 1}>
-            <PostPreview {...post} />
-          </TreeElement>
-        ))
-      }
-    </div>
-  </section>
+  <SidePanel links={links} cmd={`blog list --tag`} slot="side-panel" />
+  <p>$ blog tree --tag {tag.includes(" ") ? `'${tag}'` : tag}</p>
+  <div>
+    {
+      posts.map((post, index) => (
+        <TreeElement isLast={index === posts.length - 1}>
+          <PostPreview {...post} />
+        </TreeElement>
+      ))
+    }
+  </div>
 </Layout>

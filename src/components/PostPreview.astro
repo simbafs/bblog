@@ -1,8 +1,9 @@
 ---
-import { type CollectionEntry } from "astro:content";
+import Tag from "./Tag.astro";
 import FormattedDate from "./FormattedDate.astro";
+import { type Post } from "../lib/content";
 
-type Props = CollectionEntry<"blog">;
+type Props = Post;
 ---
 
 <a href={`/blog/${Astro.props.id}/`}>
@@ -12,7 +13,7 @@ type Props = CollectionEntry<"blog">;
   </p>
 </a>
 <div class="flex gap-2 italic">
-  {Astro.props.data.tags.map((tag) => <span>#{tag}</span>)}
+  {Astro.props.data.tags.map((tag) => <Tag tag={tag} />)}
 </div>
 <p class="text-terminal-secondary text-sm">
   {Astro.props.data.description}

@@ -1,29 +1,23 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { config } from "../../site.config";
-import { getCollection } from "astro:content";
 import TreeElement from "../../components/TreeElement.astro";
 import SidePanel from "../../components/layout/SidePanel.astro";
 import PostPreview from "../../components/PostPreview.astro";
-import FormattedDate from "../../components/FormattedDate.astro";
+import * as content from "../../lib/content";
+import { config } from "../../site.config";
 
-const posts = (await getCollection("blog")).sort(
-  (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
-);
+const posts = await content.getPosts("blog");
 
-const years = [
-  ...new Set(posts.map((post) => post.data.publishDate.getFullYear())),
-].sort((a, b) => b - a);
-const links = years.map((year) => ({
+const links = content.years(posts).map((year) => ({
   href: `/blog/${year}/`,
   text: `${year}`,
 }));
 ---
 
 <Layout title="Blog" description={config.description}>
-  <SidePanel links={links} slot="side-panel" cmd={`ls /blog/ | years`} />
+  <SidePanel links={links} slot="side-panel" cmd={`blog list --years`} />
   <section>
-    <p>$ tree /blog</p>
+    <p>$ blog tree</p>
     <div>
       {
         posts.map((post, index) => (

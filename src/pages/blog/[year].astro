@@ -1,19 +1,17 @@
 ---
 import { type GetStaticPaths } from "astro";
-import { getCollection } from "astro:content";
-import Layout from "../../layouts/Layout.astro";
+
 import TreeElement from "../../components/TreeElement.astro";
 import SidePanel from "../../components/layout/SidePanel.astro";
 import PostPreview from "../../components/PostPreview.astro";
+import Layout from "../../layouts/Layout.astro";
 import { config } from "../../site.config";
+import * as content from "../../lib/content";
 
 export const prerender = true;
 
 export const getStaticPaths = (async () => {
-  const collections = await getCollection("blog");
-  const years = [
-    ...new Set(collections.map((post) => post.data.publishDate.getFullYear())),
-  ].sort((a, b) => b - a);
+  const years = await content.getPosts("blog").then(content.years);
 
   return years.map((year) => ({
     params: { year },
@@ -21,19 +19,16 @@ export const getStaticPaths = (async () => {
   }));
 }) satisfies GetStaticPaths;
 
-const posts = await getCollection("blog").then((posts) =>
-  posts
-    .toSorted(
-      (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
-    )
-    .filter(
-      (post) =>
-        post.data.publishDate.getFullYear() === Number(Astro.params.year),
-    ),
-);
-
 const { year } = Astro.params;
 const { years } = Astro.props;
+
+const filterByYear = (year: number) => (post: content.Post) => {
+  return post.data.publishDate.getFullYear() === Number(year);
+};
+
+const posts = await content
+  .getPosts("blog")
+  .then((posts) => posts.filter(filterByYear(year)));
 
 const links = years.map((year) => ({
   href: `/blog/${year}/`,
@@ -42,9 +37,9 @@ const links = years.map((year) => ({
 ---
 
 <Layout title={`Blog in ${year}`} description={config.description}>
-  <SidePanel links={links} slot="side-panel" cmd={`ls /blog/ | years`} />
+  <SidePanel links={links} slot="side-panel" cmd={`blog list --years`} />
   <section>
-    <p>$ tree /blog --year {year}</p>
+    <p>$ blog tree --year {year}</p>
     <div>
       {
         posts.map((post, index) => (

@@ -1,0 +1,11 @@
+---
+type Props = {
+  tag: string;
+};
+
+const { tag } = Astro.props;
+---
+
+<span class="italic">
+  <a href={`/tag/${tag}/`}>#{tag}</a>
+</span>

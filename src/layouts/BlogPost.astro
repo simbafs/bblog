@@ -1,14 +1,16 @@
 ---
+import type { MarkdownHeading } from "astro";
 import type { CollectionEntry } from "astro:content";
-import Layout from "../layouts/Layout.astro";
+
 import SidePanel from "../components/layout/SidePanel.astro";
 import FormattedDate from "../components/FormattedDate.astro";
-import type { MarkdownHeading } from "astro";
+import Tag from "../components/Tag.astro";
+import Layout from "../layouts/Layout.astro";
 
 type Blog = CollectionEntry<"blog">["data"];
-
 interface Props extends Blog {
   headings: MarkdownHeading[];
+  id: string;
 }
 
 const {
@@ -19,6 +21,7 @@ const {
   heroImage,
   tags,
   headings,
+  id,
 } = Astro.props;
 
 const links = headings.map((heading) => {
@@ -30,8 +33,10 @@ const links = headings.map((heading) => {
 ---
 
 <Layout title={title} description={description}>
-  <SidePanel links={links} cmd="grep {} -e '#'" slot="side-panel" />
+  <SidePanel links={links} cmd={`blog view --heading ${id}`} slot="side-panel" />
   <article>
+    <p>$ blog view {id}</p>
+
     <div class="p-4">
       {
         heroImage && (
@@ -64,8 +69,7 @@ const links = headings.map((heading) => {
           tags && (
             <div class="flex flex-wrap justify-center gap-2">
               {tags.map((tag) => (
-                <span class="italic">#{tag}</span>
-                // TODO: add link to tag page
+                <Tag tag={tag} />
               ))}
             </div>
           )

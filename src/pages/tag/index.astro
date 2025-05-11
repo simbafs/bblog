@@ -1,21 +1,21 @@
 ---
-import { countTags } from "../../lib/content.ts";
 import Layout from "../../layouts/Layout.astro";
 import TreeElement from "../../components/TreeElement.astro";
 import { config } from "../../site.config";
+import * as content from "../../lib/content";
 
-const tags = await countTags("blog");
+const tags = await content.getPosts("blog").then(content.countTags);
 ---
 
 <Layout title="Blog" description={config.description}>
   <section>
-    <p>$ blog --tags --descend</p>
+    <p>$ blog tree --tag</p>
     <div>
       {
         tags.map(([tag, count], index) => (
           <TreeElement isLast={index == tags.length - 1} density="compact">
             <a href={`/tag/${tag}/`}>
-              <h4 class="inline font-bold">{tag}</h4>
+              <h4 class="inline font-bold italic">#{tag}</h4>
               <p class="text-terminal-secondary inline text-sm">
                 {count} post{count > 1 ? "s" : ""}
               </p>
