@@ -1,6 +1,5 @@
 ---
 import { type CollectionEntry } from "astro:content";
-import FormattedDate from "./FormattedDate.astro";
 
 type Props = CollectionEntry<"blog"> & {
   isLast?: boolean;
@@ -21,17 +20,6 @@ type Props = CollectionEntry<"blog"> & {
     <div></div>
   </div>
   <div class="mb-4 w-full">
-    <a href={`/blog/${Astro.props.id}/`}>
-      <h4 class="font-bold">{Astro.props.data.title}</h4>
-      <p class="date text-terminal-tertiary">
-        <FormattedDate date={Astro.props.data.publishDate} />
-      </p>
-    </a>
-    <div class="flex gap-2 italic">
-      {Astro.props.data.tags.map((tag) => <span>#{tag}</span>)}
-    </div>
-    <p class="text-terminal-secondary text-sm">
-      {Astro.props.data.description}
-    </p>
+    <slot />
   </div>
 </div>
