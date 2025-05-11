@@ -1,8 +1,8 @@
 ---
-// Import the global.css file here so that it is included on
-// all pages through the use of the <BaseHead /> component.
-import "../../styles/global.css";
+import { base } from "astro:config/client";
+
 import { config } from "../../site.config";
+import "../../styles/global.css";
 
 interface Props {
   title: string;
@@ -19,13 +19,13 @@ const { title, description /* , image = '/blog-placeholder-1.jpg' */ } =
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<link rel="sitemap" href="/sitemap-index.xml" />
+<link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
+<link rel="sitemap" href={`${base}/sitemap-index.xml`} />
 <link
   rel="alternate"
   type="application/rss+xml"
   title={config.title}
-  href={new URL("rss.xml", Astro.site)}
+  href={`${base}/rss.xml`}
 />
 <meta name="generator" content={Astro.generator} />
 
