@@ -35,6 +35,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Cache
+        uses: actions/cache@4.2.3
+        with:
+          path: .
+          key: bblog-cache
       - uses: pnpm/action-setup@v4.1.0
         with:
           version: 10
@@ -53,8 +58,8 @@ jobs:
       - name: Build with Astro
         run: |
           pnpm run build #\
-            # --site "${{ steps.pages.outputs.origin }}" \
-            # --base "${{ steps.pages.outputs.base_path }}"
+            --site "${{ steps.pages.outputs.origin }}" \
+            --base "${{ steps.pages.outputs.base_path }}"
         working-directory: ${{ env.BUILD_PATH }}
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
