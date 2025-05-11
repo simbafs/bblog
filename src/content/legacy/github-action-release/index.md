@@ -4,7 +4,7 @@ publishDate: '2022-03-27'
 description: ''
 tags:
   - GitHub
-  - CI/CD
+  - CICD
   - GitHub Action
   - cloud
   - golang

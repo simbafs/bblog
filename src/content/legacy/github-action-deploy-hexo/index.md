@@ -6,7 +6,7 @@ tags:
   - hexo
   - github
   - github-action
-  - CI/Cl
+  - CICD
 legacy: true
 ---
 
