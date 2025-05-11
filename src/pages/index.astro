@@ -7,11 +7,12 @@ import { config } from "../site.config";
 <Layout title={config.title} description={config.description}>
   <SidePanel
     slot="side-panel"
+    cmd="welcome"
     links={[
       { text: "Home", href: "/" },
-      { text: "Blog", href: "/blog" },
-      { text: "About", href: "/about" },
-      { text: "Terminal", href: "/terminal" },
+      { text: "Blog", href: "/blog/" },
+      { text: "Tags", href: "/tag/" },
+      { text: "Terminal", href: "/terminal/" },
     ]}
   />
   <h1 class="mb-4 text-2xl">網頁內容區塊</h1>
