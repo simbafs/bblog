@@ -17,7 +17,7 @@ const tags = await content.getPosts("blog").then(content.countTags);
           <TreeElement isLast={index == tags.length - 1} density="compact">
             <a href={`/tag/${tag}/`}>
               <h4 class="inline font-bold italic">#{tag}</h4>
-              <p class="text-terminal-secondary inline text-sm">
+              <p class="text-terminal-tertiary inline text-sm">
                 {count} post{count > 1 ? "s" : ""}
               </p>
             </a>
