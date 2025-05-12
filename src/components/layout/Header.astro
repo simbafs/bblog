@@ -1,5 +1,4 @@
 ---
-import { site, base } from "astro:config/client";
 import HeaderLink from "./HeaderLink.astro";
 import DarkSwitch from "../DarkSwitch.astro";
 
@@ -8,7 +7,6 @@ import { config } from "../../site.config";
 
 <nav class="flex flex-wrap items-center justify-between p-4">
   <div class="text-2xl font-bold">{config.title}</div>
-  <p>site: {site} base: {base}</p>
   <div class="mt-2 space-x-4 text-sm sm:mt-0">
     <div class="flex gap-2">
       <HeaderLink href="/">Home</HeaderLink>

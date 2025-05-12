@@ -1,11 +1,12 @@
 ---
 import { type HTMLAttributes } from "astro/types";
 import { base } from "astro:config/client";
+import path from "path";
 
 type Props = HTMLAttributes<"a">;
 const { href, ...props } = Astro.props;
 
-const link = String(href).replace(/^\//, "");
+const link = path.join(base, String(href));
 ---
 
-<a href={`${base}/${link}`} {...props}><slot /></a>
+<a href={link} {...props}><slot /></a>
