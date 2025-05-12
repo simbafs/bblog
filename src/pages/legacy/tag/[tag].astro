@@ -6,7 +6,6 @@ import TreeElement from "../../../components/TreeElement.astro";
 import PostPreview from "../../../components/PostPreview.astro";
 import SidePanel from "../../../components/layout/SidePanel.astro";
 import * as content from "../../../lib/content";
-import { config } from "../../../site.config";
 
 export const getStaticPaths = (async () => {
   const tags = await content.getPosts("legacy").then(content.countTags);
@@ -26,7 +25,7 @@ const links = tags.map((tag) => ({
 }));
 ---
 
-<Layout title={tag} description={config.description}>
+<Layout title={`Legacy Tag #${tag}`}>
   <SidePanel links={links} cmd={`blog list --legacy --tag`} slot="side-panel" />
   <p>$ blog tree --legacy --tag {tag.includes(" ") ? `'${tag}'` : tag}</p>
   <div>

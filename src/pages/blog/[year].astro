@@ -5,7 +5,6 @@ import TreeElement from "../../components/TreeElement.astro";
 import SidePanel from "../../components/layout/SidePanel.astro";
 import PostPreview from "../../components/PostPreview.astro";
 import Layout from "../../layouts/Layout.astro";
-import { config } from "../../site.config";
 import * as content from "../../lib/content";
 
 export const prerender = true;
@@ -36,7 +35,7 @@ const links = years.map((year) => ({
 }));
 ---
 
-<Layout title={`Blog in ${year}`} description={config.description}>
+<Layout title={`Blog in ${year}`}>
   <SidePanel links={links} slot="side-panel" cmd={`blog list --years`} />
   <section>
     <p>$ blog tree --year {year}</p>

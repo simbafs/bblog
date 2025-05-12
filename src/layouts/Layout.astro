@@ -5,10 +5,11 @@ import Footer from "../components/layout/Footer.astro";
 
 import "../styles/global.css";
 import { cn } from "../lib/cn";
+import { config } from "../site.config";
 
 type Props = {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   className?: string;
   hideSidePanel?: boolean;
 };
@@ -19,7 +20,10 @@ const { title, description, className, hideSidePanel } = Astro.props as Props;
 <!doctype html>
 <html lang="zh-tw">
   <head>
-    <BaseHead title={title} description={description} />
+    <BaseHead
+      title={title ? `${config.title} - ${title}` : config.title}
+      description={description || config.description}
+    />
   </head>
   <body class="bg-terminal-primary text-terminal-secondary">
     <div

@@ -2,14 +2,13 @@
 import Layout from "../../layouts/Layout.astro";
 import TreeElement from "../../components/TreeElement.astro";
 import A from "../../components/A.astro";
-import { config } from "../../site.config";
 import * as content from "../../lib/content";
 
 const tags = await content.getPosts("blog").then(content.countTags);
 ---
 
 <!-- TODO: 時間上這個標籤的文章分佈 -->
-<Layout title="Blog" description={config.description}>
+<Layout title="Tags">
   <section>
     <p>$ blog tree --tag</p>
     <div>

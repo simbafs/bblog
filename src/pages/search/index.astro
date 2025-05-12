@@ -1,9 +1,8 @@
 ---
 import Search from "astro-pagefind/components/Search";
 import Layout from "../../layouts/Layout.astro";
-import { config } from "../../site.config";
 ---
 
-<Layout title="搜尋" description={config.description} hideSidePanel>
+<Layout title="Search" hideSidePanel>
   <Search uiOptions={{ showImages: false }} />
 </Layout>
