@@ -1,7 +1,7 @@
 ---
 title: ExecCmd
-publishDate: '2021-10-18'
-description: ''
+publishDate: "2021-10-18"
+description: ""
 tags:
   - exec
   - process

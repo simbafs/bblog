@@ -1,7 +1,7 @@
 ---
 title: Markdown to PDF
-publishDate: '2023-02-21'
-description: ''
+publishDate: "2023-02-21"
+description: ""
 tags:
   - markdown
   - pdf
@@ -21,8 +21,7 @@ legacy: true
 
 ## 中文
 
-> **Warning**
-> ~~我後來不知道搞砸了什麼，反正目前中文是壞的，找到一個用網頁排版再用瀏覽器內建列印功能輸出成 PDF 的網頁：https://github.com/realdennis/md2pdf~~
+> **Warning** > ~~我後來不知道搞砸了什麼，反正目前中文是壞的，找到一個用網頁排版再用瀏覽器內建列印功能輸出成 PDF 的網頁：https://github.com/realdennis/md2pdf~~
 > 已解決
 
 ### 安裝字型
@@ -78,13 +77,13 @@ author: SimbaFs
 
 ## list
 
--   a
--   b
--   c
-    -   d
-    -   e
-        -   f
-            -   g
+- a
+- b
+- c
+  - d
+  - e
+    - f
+      - g
 
 1. apple
 2. book
@@ -100,8 +99,8 @@ author: SimbaFs
 
 ## check list
 
--   [ ] check 1
--   [x] check 2
+- [ ] check 1
+- [x] check 2
 
 ## code block
 
@@ -143,9 +142,9 @@ func main(){
 
 ## 參考連結
 
--   https://sam.webspace.tw/2020/01/13/%E4%BD%BF%E7%94%A8%20Pandoc%20%E5%B0%87%20Markdown%20%E8%BD%89%E7%82%BA%20PDF%20%E6%96%87%E4%BB%B6/
--   https://github.com/jgm/pandoc/wiki/Pandoc-with-Chinese
--   https://github.com/Wandmalfarbe/pandoc-latex-template
--   https://tex.stackexchange.com/questions/341809/pandoc-does-not-recognize-chinese-characters
--   https://tex.stackexchange.com/questions/179778/xelatex-under-ubuntu
--   https://pandoc.org/
+- https://sam.webspace.tw/2020/01/13/%E4%BD%BF%E7%94%A8%20Pandoc%20%E5%B0%87%20Markdown%20%E8%BD%89%E7%82%BA%20PDF%20%E6%96%87%E4%BB%B6/
+- https://github.com/jgm/pandoc/wiki/Pandoc-with-Chinese
+- https://github.com/Wandmalfarbe/pandoc-latex-template
+- https://tex.stackexchange.com/questions/341809/pandoc-does-not-recognize-chinese-characters
+- https://tex.stackexchange.com/questions/179778/xelatex-under-ubuntu
+- https://pandoc.org/

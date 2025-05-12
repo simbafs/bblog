@@ -1,7 +1,7 @@
 ---
 title: IPFS
-publishDate: '2022-08-22'
-description: ''
+publishDate: "2022-08-22"
+description: ""
 tags:
   - web3
   - decentralized
@@ -175,9 +175,9 @@ $ dig +short TXT _dnslink.ipfs.simbafs.cc
 
 以下三個方式，都可以在瀏覽器中取得我們的檔案
 
--   ipfs.io/ipfs/QmermPSVVcmcutmQ1woTAtUcByUvoS2F3ZcKdkdbuAdEi5
--   ipfs.io/ipns/k51qzi5uqu5djj5l4icq7jgwc06bzhxjxpwo0ghpyf9h5pah5hr5i4se7sosnm
--   ipfs.io/ipns/ipfs.simbafs.cc
+- ipfs.io/ipfs/QmermPSVVcmcutmQ1woTAtUcByUvoS2F3ZcKdkdbuAdEi5
+- ipfs.io/ipns/k51qzi5uqu5djj5l4icq7jgwc06bzhxjxpwo0ghpyf9h5pah5hr5i4se7sosnm
+- ipfs.io/ipns/ipfs.simbafs.cc
 
 ## 本機閘道器
 
@@ -186,14 +186,14 @@ $ dig +short TXT _dnslink.ipfs.simbafs.cc
 
 首先是和公共閘道器一樣的功能
 
--   localhost:8080/ipfs/QmermPSVVcmcutmQ1woTAtUcByUvoS2F3ZcKdkdbuAdEi5
--   localhost:8080/ipns/k51qzi5uqu5djj5l4icq7jgwc06bzhxjxpwo0ghpyf9h5pah5hr5i4se7sosnm
--   localhost:8080/ipfs.io/ipns/ipfs.simbafs.cc
+- localhost:8080/ipfs/QmermPSVVcmcutmQ1woTAtUcByUvoS2F3ZcKdkdbuAdEi5
+- localhost:8080/ipns/k51qzi5uqu5djj5l4icq7jgwc06bzhxjxpwo0ghpyf9h5pah5hr5i4se7sosnm
+- localhost:8080/ipfs.io/ipns/ipfs.simbafs.cc
 
 然後是某些公共閘道器沒有開放的功能
 
--   ipfs.simbafs.cc.ipns.localhost:8080
--   k51qzi5uqu5djj5l4icq7jgwc06bzhxjxpwo0ghpyf9h5pah5hr5i4se7sosnm.ipns.localhost:8080
+- ipfs.simbafs.cc.ipns.localhost:8080
+- k51qzi5uqu5djj5l4icq7jgwc06bzhxjxpwo0ghpyf9h5pah5hr5i4se7sosnm.ipns.localhost:8080
 
 > ### CID in subdomain
 >

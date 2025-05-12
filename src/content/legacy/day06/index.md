@@ -1,7 +1,7 @@
 ---
 title: Day 06：螢幕切八段！多開神器 tmux
-publishDate: '2021-09-06'
-description: ''
+publishDate: "2021-09-06"
+description: ""
 tags:
   - cli
   - terminal
@@ -16,8 +16,8 @@ legacy: true
 今天起要介紹的是 tmux，這是一個終端機的 **session 管理器**，什麼是 session 呢？你可以把 session 理解為一個**終端機**（畫面）和**主機** （你的電腦）的連線，tmux 做的事就是把一個終端機**切分成多個終端機**，白話說就是**多開神器**啦！這樣你就可以左邊編輯程式、右邊看執行結果（如圖）。而且一切操作都在**一個**終端機視窗裡面，這意味著即使你在**沒有圖形界面**的純文字模式（像是 single user mode、ssh 連線）也可以享受如同圖形界面的便利！
 
 | ![tmux demo](tmuxDemo.gif) |
-| :----------------------------------------------------------: |
-|                          tmux demo                           |
+| :------------------------: |
+|         tmux demo          |
 
 # 安裝
 
@@ -47,9 +47,9 @@ curl https://gist.githubusercontent.com/simbafs/e06a1763c1967ce3f4b5ef643db5e0b3
 
 這個檔案是我從**網路**上找到的，後來有加一些自己的東西，把檔案下載下來並存到 `~/.tmux.conf` 裡面，關於每一行的用途都有用註解標示，主要幾個改變有以下幾點：
 
--   把前置按鍵（prefix）從 <kbd>Ctrl</kbd><kbd>b</kbd> 改成 <kbd>Ctrl</kbd><kbd>a</kbd> (第 16 ~ 19 行，不喜歡的話可以拿掉)，你也可以改成其他按鍵
--   底部 status bar 變成彩色，不再是單調的綠色
--   一些快捷鍵綁定
+- 把前置按鍵（prefix）從 <kbd>Ctrl</kbd><kbd>b</kbd> 改成 <kbd>Ctrl</kbd><kbd>a</kbd> (第 16 ~ 19 行，不喜歡的話可以拿掉)，你也可以改成其他按鍵
+- 底部 status bar 變成彩色，不再是單調的綠色
+- 一些快捷鍵綁定
 
 # 啟動
 

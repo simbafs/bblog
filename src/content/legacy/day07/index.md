@@ -1,7 +1,7 @@
 ---
 title: Day 07：整合 tmux 和 zsh
-publishDate: '2021-09-07'
-description: ''
+publishDate: "2021-09-07"
+description: ""
 tags:
   - cli
   - terminal

@@ -1,7 +1,7 @@
 ---
 title: Firenvim
-publishDate: '2023-08-18'
-description: ''
+publishDate: "2023-08-18"
+description: ""
 tags:
   - nvim
   - vim

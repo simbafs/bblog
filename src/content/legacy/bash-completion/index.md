@@ -1,7 +1,7 @@
 ---
 title: bash completion
-publishDate: '2020-11-14'
-description: ''
+publishDate: "2020-11-14"
+description: ""
 tags:
   - bash
   - completion

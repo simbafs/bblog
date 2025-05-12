@@ -1,7 +1,7 @@
 ---
 title: Node Require from Project Root
-publishDate: '2020-09-02'
-description: ''
+publishDate: "2020-09-02"
+description: ""
 tags:
   - nodejs
   - js
@@ -28,7 +28,7 @@ legacy: true
 在 `index.js` 裡面如果要引入 `random.js` 就會變成這樣
 
 ```js
-const random = require('../../lib/random.js');
+const random = require("../../lib/random.js");
 ```
 
 ## 爛解法

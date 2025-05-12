@@ -1,7 +1,7 @@
 ---
 title: Raylib at Linux
-publishDate: '2025-01-12'
-description: ''
+publishDate: "2025-01-12"
+description: ""
 tags:
   - go
   - c
@@ -71,4 +71,5 @@ go run -tags x11 .
 ```
 
 # 結論
+
 wayland 真的處處是陷阱

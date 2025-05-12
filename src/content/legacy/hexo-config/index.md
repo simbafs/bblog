@@ -1,7 +1,7 @@
 ---
 title: hexo-config
-publishDate: '2020-02-12'
-description: ''
+publishDate: "2020-02-12"
+description: ""
 tags:
   - hexo
   - cactus

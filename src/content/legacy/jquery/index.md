@@ -1,7 +1,7 @@
 ---
 title: jQuery
-publishDate: '2020-03-15'
-description: ''
+publishDate: "2020-03-15"
+description: ""
 tags:
   - js
   - jquery

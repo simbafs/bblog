@@ -1,7 +1,7 @@
 ---
 title: Dockerfile Collection
-publishDate: '2023-08-06'
-description: ''
+publishDate: "2023-08-06"
+description: ""
 tags:
   - docker
   - nextjs
@@ -13,6 +13,7 @@ legacy: true
 # Dockerfile Collection
 
 ## Nextjs with pnpm
+
 ```Dockerfile
 FROM node:20-slim AS base
 ENV PNPM_HOME="/pnpm"

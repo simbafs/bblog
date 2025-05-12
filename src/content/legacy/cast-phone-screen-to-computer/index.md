@@ -1,7 +1,7 @@
 ---
 title: Cast Phone Screen to Computer
-publishDate: '2021-06-14'
-description: ''
+publishDate: "2021-06-14"
+description: ""
 tags:
   - android
   - linux

@@ -1,7 +1,7 @@
 ---
 title: bash number loop
-publishDate: '2020-11-15'
-description: ''
+publishDate: "2020-11-15"
+description: ""
 tags:
   - bash
   - loop

@@ -1,7 +1,7 @@
 ---
 title: SSH Server
-publishDate: '2023-07-12'
-description: ''
+publishDate: "2023-07-12"
+description: ""
 tags:
   - golang
   - ssh
@@ -11,6 +11,7 @@ legacy: true
 # SSH Server
 
 ## 開啟伺服器
+
 ### 建立設定
 
 `main` 函數開頭先建立了 `ssh.ServerConfig`、把伺服器的金鑰讀進來
@@ -588,5 +589,6 @@ func SetWinsize(fd uintptr, w, h uint32) {
 ```
 
 ## 參考資料
-* https://github.com/Scalingo/go-ssh-examples/blob/master/server_complex.go
-* https://pkg.go.dev/golang.org/x/crypto/ssh
+
+- https://github.com/Scalingo/go-ssh-examples/blob/master/server_complex.go
+- https://pkg.go.dev/golang.org/x/crypto/ssh

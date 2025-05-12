@@ -1,7 +1,7 @@
 ---
 title: File System
-publishDate: '2022-08-04'
-description: ''
+publishDate: "2022-08-04"
+description: ""
 tags:
   - fs
   - filesystem
@@ -22,15 +22,15 @@ legacy: true
 
 ```javascript
 // pages/index.js
-import fs from 'fs/promises';
+import fs from "fs/promises";
 
 export async function getStaticProps() {
-	console.log(await fs.stat('./content/index.md'));
-	const posts = ['index.md'];
-	console.log({ posts });
-	return {
-		props: { posts },
-	};
+  console.log(await fs.stat("./content/index.md"));
+  const posts = ["index.md"];
+  console.log({ posts });
+  return {
+    props: { posts },
+  };
 }
 ```
 
@@ -40,21 +40,21 @@ export async function getStaticProps() {
 
 ```javascript
 // util/fsTest.js
-import fs from 'fs/promises';
+import fs from "fs/promises";
 
 export default async function dirs() {
-	return await fs.readdir(`${process.cwd()}/content`);
+  return await fs.readdir(`${process.cwd()}/content`);
 }
 ```
 
 ```javascript
 // pages/index.js
-import fsTest from '../util/fsTest';
+import fsTest from "../util/fsTest";
 
 export async function getStaticProps() {
-	const posts = ['index.md'];
-	console.log({ posts, fsTest: await fsTest() });
-	return { props: { posts } };
+  const posts = ["index.md"];
+  console.log({ posts, fsTest: await fsTest() });
+  return { props: { posts } };
 }
 ```
 
@@ -64,14 +64,14 @@ export async function getStaticProps() {
 
 ```javascript
 // util/tree.js
-import fs from 'fs/promises';
+import fs from "fs/promises";
 
 async function tree(root, opt) {
-	// some verified code
+  // some verified code
 }
 
 function tree2list(tree, opt) {
-	// some verified code
+  // some verified code
 }
 
 export { tree, tree2list };
@@ -79,13 +79,13 @@ export { tree, tree2list };
 
 ```javascript
 // pages/index.js
-import { tree, tree2list } from '../util/tree';
+import { tree, tree2list } from "../util/tree";
 
 export async function getStaticProps() {
-	const tree = await tree('./content', { extensions: ['.md'] });
-	const posts = tree2list(tree, { sliceHead: 1 });
-	return {
-		props: { posts },
-	};
+  const tree = await tree("./content", { extensions: [".md"] });
+  const posts = tree2list(tree, { sliceHead: 1 });
+  return {
+    props: { posts },
+  };
 }
 ```

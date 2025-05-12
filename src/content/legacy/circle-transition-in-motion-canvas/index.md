@@ -1,7 +1,7 @@
 ---
 title: Circle Transition in Motion Canvas
-publishDate: '2024-09-29'
-description: ''
+publishDate: "2024-09-29"
+description: ""
 tags:
   - animation
   - motion canvas
@@ -20,28 +20,28 @@ legacy: true
 
 ```tsx
 function* circleTransition(view: View2D, duration = 0.6) {
-	const { x, y } = useScene().getSize()
-	const r = Math.sqrt((x * x) / 4 + (y * y) / 4)
+  const { x, y } = useScene().getSize();
+  const r = Math.sqrt((x * x) / 4 + (y * y) / 4);
 
-	const circle = (<Circle />) as Circle
-	view.add(circle)
+  const circle = (<Circle />) as Circle;
+  view.add(circle);
 
-	yield* circle
-		.compositeOperation('destination-atop') // keypoint
-		.size(new Vector2(3 * r, 3 * r)) // 2r is diameter, set to 3r for better appearance
-		.scale(0.000001) // this must be a value not 0, but small enough to be invisible
-		.fill('black') // the circle nned a color
+  yield* circle
+    .compositeOperation("destination-atop") // keypoint
+    .size(new Vector2(3 * r, 3 * r)) // 2r is diameter, set to 3r for better appearance
+    .scale(0.000001) // this must be a value not 0, but small enough to be invisible
+    .fill("black"); // the circle nned a color
 
-	const endTransition = useTransition(
-		ctx => {},
-		ctx => {},
-	)
+  const endTransition = useTransition(
+    (ctx) => {},
+    (ctx) => {},
+  );
 
-	yield* circle.scale(1, duration)
-	endTransition()
-	yield* circle.scale(0)
+  yield* circle.scale(1, duration);
+  endTransition();
+  yield* circle.scale(0);
 
-	circle.remove()
+  circle.remove();
 }
 ```
 
@@ -49,28 +49,28 @@ function* circleTransition(view: View2D, duration = 0.6) {
 
 ```tsx
 export default makeScene2D(function* (view) {
-	const container = createRef<Rect>()
+  const container = createRef<Rect>();
 
-	view.add(
-		<>
-			<Rect
-				ref={container}
-				layout
-				scale={4}
-				gap={10}
-				height="100%"
-				width="100%"
-				fill="#7733ba"
-				alignItems={'center'}
-				justifyContent={'center'}
-			>
-				<Txt text="Hello World" fill="white" fontSize={60} />
-			</Rect>
-		</>,
-	)
+  view.add(
+    <>
+      <Rect
+        ref={container}
+        layout
+        scale={4}
+        gap={10}
+        height="100%"
+        width="100%"
+        fill="#7733ba"
+        alignItems={"center"}
+        justifyContent={"center"}
+      >
+        <Txt text="Hello World" fill="white" fontSize={60} />
+      </Rect>
+    </>,
+  );
 
-	yield* circleTransition(view, 2)
+  yield* circleTransition(view, 2);
 
-	yield* waitFor(1)
-})
+  yield* waitFor(1);
+});
 ```

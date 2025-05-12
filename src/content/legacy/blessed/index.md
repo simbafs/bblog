@@ -1,7 +1,7 @@
 ---
 title: Blessed 切換畫面
-publishDate: '2020-02-20'
-description: ''
+publishDate: "2020-02-20"
+description: ""
 tags:
   - blessed
   - js
@@ -22,50 +22,50 @@ legacy: true
    這是測試程式碼
 
 ```js
-const blessed = require('blessed');
-const contrib = require('blessed-contrib');
+const blessed = require("blessed");
+const contrib = require("blessed-contrib");
 
 const screen = blessed.screen({
-	title: 'JSON viewer',
-	debug: true,
+  title: "JSON viewer",
+  debug: true,
 });
 const grid = new contrib.grid({
-	rows: 1,
-	cols: 2,
-	screen: screen,
+  rows: 1,
+  cols: 2,
+  screen: screen,
 });
 
 const tree = grid.set(0, 0, 1, 1, blessed.box, {
-	border: { type: 'line' },
-	content: 'Tree',
-	label: 'Tree',
+  border: { type: "line" },
+  content: "Tree",
+  label: "Tree",
 });
 
 const edit = grid.set(0, 1, 1, 1, blessed.box, {
-	border: { type: 'line' },
-	content: 'Edit',
-	label: 'Edit',
+  border: { type: "line" },
+  content: "Edit",
+  label: "Edit",
 });
 
 const box2 = blessed.box({
-	border: { type: 'line' },
-	content: 'Box2',
-	label: 'Box2',
+  border: { type: "line" },
+  content: "Box2",
+  label: "Box2",
 });
 const box3 = blessed.box({
-	border: { type: 'line' },
-	content: 'Box3',
-	label: 'Box3',
+  border: { type: "line" },
+  content: "Box3",
+  label: "Box3",
 });
 const box4 = blessed.box({
-	border: { type: 'line' },
-	content: 'Box4',
-	label: 'Box4',
+  border: { type: "line" },
+  content: "Box4",
+  label: "Box4",
 });
 const box5 = blessed.box({
-	border: { type: 'line' },
-	content: 'Box5',
-	label: 'Box5',
+  border: { type: "line" },
+  content: "Box5",
+  label: "Box5",
 });
 
 edit.append(box2);
@@ -76,15 +76,15 @@ edit.append(box2);
 edit.append(box3);
 console.log(Object.keys(edit.children));
 
-screen.key(['escape', 'q', 'C-c'], () => {
-	process.exit(0);
+screen.key(["escape", "q", "C-c"], () => {
+  process.exit(0);
 });
 
 tree.focus();
 
-screen.key(['tab', 't'], function (ch, key) {
-	if (screen.focused == tree.rows) edit.focus();
-	else tree.focus();
+screen.key(["tab", "t"], function (ch, key) {
+  if (screen.focused == tree.rows) edit.focus();
+  else tree.focus();
 });
 
 screen.render();

@@ -1,7 +1,7 @@
 ---
 title: GitHub Action 自動部署 hexo
-publishDate: '2020-08-16'
-description: ''
+publishDate: "2020-08-16"
+description: ""
 tags:
   - hexo
   - github
@@ -61,63 +61,63 @@ secret key 要放在你存放部落格檔案的 repo，owlran 大大是放在同
 ```yaml
 name: Hexo
 on:
-    push:
-        branches:
-            - master
+  push:
+    branches:
+      - master
 jobs:
-    build:
-        runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-latest
 
-        steps:
-            - uses: actions/checkout@v1
-            - name: Use Node.js ${{ matrix.node_version }}
-              uses: actions/setup-node@v1
-              with:
-                  node_version: ${{ matrix.node_version }}
-            - name: Configuration environment
-              env:
-                  DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
-              run: |
-                  mkdir -p ~/.ssh/
-                  echo "$DEPLOY_KEY" | tr -d '\r' > ~/.ssh/id_rsa
-                  echo "$DEPLOY_KEY"
-                  chmod 600 ~/.ssh/id_rsa
-                  ssh-keyscan github.com >> ~/.ssh/known_hosts
-            - name: git config
-              env:
-                  username:
-                  email:
-              run: |
-                  git config --global user.name "$username"
-                  git config --global user.email "$email"
-                  git config --global commit.gpgsign true
-            - name: Imoport GPG key
-              id: import_gpg
-              uses: crazy-max/ghaction-import-gpg@v2
-              with:
-                  git_user_signingkey: true
-                  git_commit_gpgsign: true
-              env:
-                  GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
-                  PASSPHRASE: ${{ secrets.PASSPHRASE }}
-            - name: Update themes
-              run: |
-                  git submodule init
-                  git submodule update
-            - name: Install dependencies
-              run: |
-                  npm i -g hexo-cli
-                  npm i
-            - name: Clean file
-              run: |
-                  hexo clean
-            - name: Generate hexo
-              run: |
-                  hexo generate
-            - name: list posts
-              run: |
-                  hexo list post
-            - name: Deploy hexo
-              run: |
-                  hexo deploy
+    steps:
+      - uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node_version }}
+        uses: actions/setup-node@v1
+        with:
+          node_version: ${{ matrix.node_version }}
+      - name: Configuration environment
+        env:
+          DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$DEPLOY_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+          echo "$DEPLOY_KEY"
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+      - name: git config
+        env:
+          username:
+          email:
+        run: |
+          git config --global user.name "$username"
+          git config --global user.email "$email"
+          git config --global commit.gpgsign true
+      - name: Imoport GPG key
+        id: import_gpg
+        uses: crazy-max/ghaction-import-gpg@v2
+        with:
+          git_user_signingkey: true
+          git_commit_gpgsign: true
+        env:
+          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+          PASSPHRASE: ${{ secrets.PASSPHRASE }}
+      - name: Update themes
+        run: |
+          git submodule init
+          git submodule update
+      - name: Install dependencies
+        run: |
+          npm i -g hexo-cli
+          npm i
+      - name: Clean file
+        run: |
+          hexo clean
+      - name: Generate hexo
+        run: |
+          hexo generate
+      - name: list posts
+        run: |
+          hexo list post
+      - name: Deploy hexo
+        run: |
+          hexo deploy
 ```

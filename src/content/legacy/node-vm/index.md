@@ -1,7 +1,7 @@
 ---
 title: Node VM
-publishDate: '2021-01-13'
-description: ''
+publishDate: "2021-01-13"
+description: ""
 tags:
   - node
   - nodejs
@@ -25,17 +25,17 @@ VM 是 node.js 的核心模組，提供安全的環境 (沙箱) 來測試不信�
 VM 模組提供 `Script` 建構子，可以透過他來建立 `Script` 物件。
 
 ```js
-const vm = require('vm');
+const vm = require("vm");
 
-const script = new vm.Script('i++');
+const script = new vm.Script("i++");
 ```
 
 也可以用 `vm.createScript`
 
 ```js
-const vm = require('vm');
+const vm = require("vm");
 
-const script = vm.createScript('i++');
+const script = vm.createScript("i++");
 ```
 
 > [vm.Script](https://nodejs.org/dist/latest-v14.x/docs/api/vm.html#vm_class_vm_script)  
@@ -47,7 +47,7 @@ vm 模組沒有提供建立 context 的建構子，我們只能透過 `vm.create
 注意 `vm.createContext` 不是 pure function，除了會回傳 context 以外，還會把傳入的物件變成 context，兩者傳入 `vm.isContext` 都會回傳 `true`。
 
 ```js
-const vm = require('vm');
+const vm = require("vm");
 
 const context1 = { i: 0 };
 const context2 = vm.createContext(context1);
@@ -68,10 +68,10 @@ context1 === context2; // true
 下面的範例，會把 context 中的 `i` 複製一遍後回傳他的值和長度。
 
 ```js
-const vm = require('vm');
+const vm = require("vm");
 
-const script = vm.createScript('i += i; [i, i.length]');
-const context = vm.createContext({ i: 'node' });
+const script = vm.createScript("i += i; [i, i.length]");
+const context = vm.createContext({ i: "node" });
 
 script.runInContext(context); // [ 'nodenode', 8 ]
 ```

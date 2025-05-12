@@ -1,7 +1,7 @@
 ---
 title: Pass Value From Child to Parent
-publishDate: '2024-10-12'
-description: ''
+publishDate: "2024-10-12"
+description: ""
 tags:
   - context
   - rerender
@@ -20,10 +20,10 @@ legacy: true
 
 ```jsx
 function Child() {
-	const [value, setValue] = useState(0)
-	const edit = useEditor()
+  const [value, setValue] = useState(0);
+  const edit = useEditor();
 
-	return <button onClick={() => edit(value).then(alert)}>SetValue</button>
+  return <button onClick={() => edit(value).then(alert)}>SetValue</button>;
 }
 ```
 
@@ -32,32 +32,45 @@ function Child() {
 首先這個版本是我第一個想到，但是因為有點問題，所以我又寫了第二個使用 context 的版本，不過這個不需要 context 的版本也被我修改到可以用了。
 
 ```tsx
-export type ModalComponent<T> = FC<{ isOpen: boolean; initValue: T; callback: (value: T, ok: boolean) => void }>
+export type ModalComponent<T> = FC<{
+  isOpen: boolean;
+  initValue: T;
+  callback: (value: T, ok: boolean) => void;
+}>;
 
 export function useEditor<T>(Editor: ModalComponent<T>, zeroValue: T) {
-	const [initValue, setInitValue] = useState<T | undefined>(undefined)
-	const [callback, setCallback] = useState<(value: T, ok: boolean) => void>(() => {})
-	const isOpen = initValue !== undefined
-	const [key, setKey] = useState(0)
+  const [initValue, setInitValue] = useState<T | undefined>(undefined);
+  const [callback, setCallback] = useState<(value: T, ok: boolean) => void>(
+    () => {},
+  );
+  const isOpen = initValue !== undefined;
+  const [key, setKey] = useState(0);
 
-	const edit = (initValue: T) => {
-		// console.log(`edit with ${initValue}`)
-		return new Promise<T>((res, rej) => {
-			setKey(key + 1)
-			setInitValue(initValue) // open
-			setCallback(() => (value: T, ok: boolean) => {
-				if (ok) res(value)
-				else rej()
+  const edit = (initValue: T) => {
+    // console.log(`edit with ${initValue}`)
+    return new Promise<T>((res, rej) => {
+      setKey(key + 1);
+      setInitValue(initValue); // open
+      setCallback(() => (value: T, ok: boolean) => {
+        if (ok) res(value);
+        else rej();
 
-				setInitValue(undefined) // close
-			})
-		})
-	}
+        setInitValue(undefined); // close
+      });
+    });
+  };
 
-	return [
-		() => <Editor isOpen={isOpen} initValue={initValue || zeroValue} callback={callback} key={key} />,
-		edit,
-	] as const
+  return [
+    () => (
+      <Editor
+        isOpen={isOpen}
+        initValue={initValue || zeroValue}
+        callback={callback}
+        key={key}
+      />
+    ),
+    edit,
+  ] as const;
 }
 ```
 
@@ -65,71 +78,83 @@ export function useEditor<T>(Editor: ModalComponent<T>, zeroValue: T) {
 
 ```tsx
 function Parent() {
-	const [Editor, edit] = useEditor<number>(MyEditor, 0)
+  const [Editor, edit] = useEditor<number>(MyEditor, 0);
 
-	return (
-		<>
-			<Child edit={edit} />
-			<Editor />
-		</>
-	)
+  return (
+    <>
+      <Child edit={edit} />
+      <Editor />
+    </>
+  );
 }
 
 function Child({ edit }: { edit: edit<number> }) {
-	return <button onClick={() => edit(10).then(alert)}>Edit</button>
+  return <button onClick={() => edit(10).then(alert)}>Edit</button>;
 }
 ```
 
 ### Pros and Cons
 
--   pros
-    -   使用方便
-    -   可以有多個不同的 edior
--   cons
-    -   如果呼叫 `useEditor` 的地方離使用 `edit()` 很遠，就要一直傳遞 `edit` 很多次，有點麻煩
+- pros
+  - 使用方便
+  - 可以有多個不同的 edior
+- cons
+  - 如果呼叫 `useEditor` 的地方離使用 `edit()` 很遠，就要一直傳遞 `edit` 很多次，有點麻煩
 
 ## With Context
 
 然後這是有 context 的版本
 
 ```tsx
-const EditorContext = createContext<(init: string, res: (value: string) => void, rej: () => void) => void>(() => {})
+const EditorContext = createContext<
+  (init: string, res: (value: string) => void, rej: () => void) => void
+>(() => {});
 
 function EditorProvider({ children }: { children: React.ReactNode }) {
-	const [initValue, setInitValue] = useState('')
-	const [res, setRes] = useState<(value: string) => void>(() => {})
-	const [rej, setRej] = useState<() => void>(() => {})
-	const [isOpen, setIsOpen] = useState(false)
+  const [initValue, setInitValue] = useState("");
+  const [res, setRes] = useState<(value: string) => void>(() => {});
+  const [rej, setRej] = useState<() => void>(() => {});
+  const [isOpen, setIsOpen] = useState(false);
 
-	const setContext = (init: string, res: (value: string) => void, rej: () => void) => {
-		console.log('setContext')
-		setIsOpen(true)
-		setInitValue(init)
-		setRes(() => (value: string) => {
-			res(value)
-			setIsOpen(false)
-		})
-		setRej(() => () => {
-			rej()
-			setIsOpen(false)
-		})
-	}
+  const setContext = (
+    init: string,
+    res: (value: string) => void,
+    rej: () => void,
+  ) => {
+    console.log("setContext");
+    setIsOpen(true);
+    setInitValue(init);
+    setRes(() => (value: string) => {
+      res(value);
+      setIsOpen(false);
+    });
+    setRej(() => () => {
+      rej();
+      setIsOpen(false);
+    });
+  };
 
-	return (
-		<EditorContext.Provider value={setContext}>
-			{children}
-			<Editor isOpen={isOpen} init={initValue} res={res} rej={rej} key={initValue} />
-		</EditorContext.Provider>
-	)
+  return (
+    <EditorContext.Provider value={setContext}>
+      {children}
+      <Editor
+        isOpen={isOpen}
+        init={initValue}
+        res={res}
+        rej={rej}
+        key={initValue}
+      />
+    </EditorContext.Provider>
+  );
 }
 
 function useEditor() {
-	const setInitValue = useContext(EditorContext)
+  const setInitValue = useContext(EditorContext);
 
-	return (initValue: string) =>
-		new Promise<string>((res, rej) => {
-			setInitValue(initValue, res, rej)
-		})
+  return (initValue: string) =>
+    new Promise<string>((res, rej) => {
+      setInitValue(initValue, res, rej);
+    });
 }
 ```
 
@@ -138,32 +163,35 @@ function useEditor() {
 ```tsx
 // page.tsx
 export default function Page() {
-	return (
-		<EditorProvider>
-			<Child />
-		</EditorProvider>
-	)
+  return (
+    <EditorProvider>
+      <Child />
+    </EditorProvider>
+  );
 }
 
 function Child() {
-	const editor = useEditor()
+  const editor = useEditor();
 
-	return (
-		<button type="button" onClick={() => editor(10).then(console.log, console.error)}>
-			Set Editor
-		</button>
-	)
+  return (
+    <button
+      type="button"
+      onClick={() => editor(10).then(console.log, console.error)}
+    >
+      Set Editor
+    </button>
+  );
 }
 ```
 
 ### Pros and Cons
 
--   pros
-    -   不需要一直傳遞 `edit`
--   cons
-    -   因為 context 所以如果要有多個不同的 edit 視窗就比較麻煩
-    -   萬一 context 變多就會包很多 context provider
-    -   context 比較複雜
+- pros
+  - 不需要一直傳遞 `edit`
+- cons
+  - 因為 context 所以如果要有多個不同的 edit 視窗就比較麻煩
+  - 萬一 context 變多就會包很多 context provider
+  - context 比較複雜
 
 ## 結論
 

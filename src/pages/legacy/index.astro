@@ -15,7 +15,11 @@ const links = content.years(posts).map((year) => ({
 ---
 
 <Layout title="Blog" description={config.description}>
-  <SidePanel links={links} slot="side-panel" cmd={`blog list --legacy --years`} />
+  <SidePanel
+    links={links}
+    slot="side-panel"
+    cmd={`blog list --legacy --years`}
+  />
   <section>
     <p>$ blog tree --legacy</p>
     <div>

@@ -1,7 +1,7 @@
 ---
 title: Reverse SSH
-publishDate: '2020-02-23'
-description: ''
+publishDate: "2020-02-23"
+description: ""
 tags:
   - ssh
   - linux
@@ -52,8 +52,9 @@ $ ssh server@localhost -p 1111
 最後可以把這堆在 vps 上再做一次就可以在 internet 連回社辦伺服器了
 
 ### CentOS
+
 > update: 2024/03/19
-最近接管實驗室的伺服器，系統是 CentOS，似乎是 CentOS 上 autossh 版本問題，需要用以下指令才能正確啟動 autossh
+> 最近接管實驗室的伺服器，系統是 CentOS，似乎是 CentOS 上 autossh 版本問題，需要用以下指令才能正確啟動 autossh
 
 ```
 autossh -M 0 -f \

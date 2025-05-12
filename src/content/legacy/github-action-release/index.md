@@ -1,7 +1,7 @@
 ---
 title: 用 Github Action 編譯並發 Release
-publishDate: '2022-03-27'
-description: ''
+publishDate: "2022-03-27"
+description: ""
 tags:
   - GitHub
   - CICD
@@ -26,9 +26,9 @@ legacy: true
 
 ```yaml
 on:
-    push:
-        tags:
-            - 'v[0-9]+.[0-9]+.[0-9]+'
+  push:
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+"
 ```
 
 意思是只有像是 `v0.1.13` 這樣的標籤會觸發，也就是你建立新版本時。
@@ -42,14 +42,14 @@ on:
 - name: Set up Go
   uses: actions/setup-go@v3.0.0
   with:
-      go-version: 1.17.x
+    go-version: 1.17.x
 - name: Run GoReleaser
   uses: goreleaser/goreleaser-action@v2.9.1
   with:
-      version: latest
-      args: release --rm-dist
+    version: latest
+    args: release --rm-dist
   env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 注意，裡面有個 `secret.GITHUB_TOKEN`，這個東西你就照寫，不要抄錯，GitHub Action 會自動在 runtime 填入，所以你也不用特別去設定。
@@ -64,11 +64,11 @@ goreleaser 的文件裡面有推薦一個上傳的套件，但是可能是我笨
 - name: Upload To Github Release
   uses: xresloader/upload-to-github-release@v1.3.2
   env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   with:
-      file: 'dist/telegrary_*'
-      draft: true
-      tag_name: ${{ steps.tagName.outputs.tag }}
+    file: "dist/telegrary_*"
+    draft: true
+    tag_name: ${{ steps.tagName.outputs.tag }}
 ```
 
 你會看到在上傳之前還有一個步驟，這個是用來取得 tag name 用的，他用來指定檔案要上傳到哪裡  
@@ -83,40 +83,40 @@ goreleaser 的文件裡面有推薦一個上傳的套件，但是可能是我笨
 name: Release
 
 on:
-    push:
-        tags:
-            - 'v[0-9]+.[0-9]+.[0-9]+'
+  push:
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+"
 
 jobs:
-    goreleaser:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v2
-            - name: Unshallow
-              run: git fetch --prune --unshallow
-            - name: Set up Go
-              uses: actions/setup-go@v3.0.0
-              with:
-                  go-version: 1.17.x
-            - name: Run GoReleaser
-              uses: goreleaser/goreleaser-action@v2.9.1
-              with:
-                  version: latest
-                  args: release --rm-dist
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            - name: ls
-              run: |
-                  ls dist
-            - uses: little-core-labs/get-git-tag@v3.0.1
-              id: tagName
-            - name: Upload To Github Release
-              uses: xresloader/upload-to-github-release@v1.3.2
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              with:
-                  file: 'dist/telegrary_*'
-                  draft: true
-                  tag_name: ${{ steps.tagName.outputs.tag }}
+  goreleaser:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Unshallow
+        run: git fetch --prune --unshallow
+      - name: Set up Go
+        uses: actions/setup-go@v3.0.0
+        with:
+          go-version: 1.17.x
+      - name: Run GoReleaser
+        uses: goreleaser/goreleaser-action@v2.9.1
+        with:
+          version: latest
+          args: release --rm-dist
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: ls
+        run: |
+          ls dist
+      - uses: little-core-labs/get-git-tag@v3.0.1
+        id: tagName
+      - name: Upload To Github Release
+        uses: xresloader/upload-to-github-release@v1.3.2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          file: "dist/telegrary_*"
+          draft: true
+          tag_name: ${{ steps.tagName.outputs.tag }}
 ```

@@ -1,7 +1,7 @@
 ---
 title: Nginx Reverse Proxy Setup
-publishDate: '2020-02-13'
-description: ''
+publishDate: "2020-02-13"
+description: ""
 tags:
   - nginx
   - reverse proxy

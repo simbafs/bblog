@@ -1,7 +1,7 @@
 ---
 title: Add Google Search and Sitemap
-publishDate: '2020-08-19'
-description: ''
+publishDate: "2020-08-19"
+description: ""
 tags:
   - hexo
 legacy: true
@@ -24,7 +24,7 @@ npm i -S hexo-generator-sitemap
 ```yaml
 # sitemap
 sitemap:
-    path: sitemap.xml
+  path: sitemap.xml
 ```
 
 # 驗證網域
@@ -41,7 +41,7 @@ sitemap:
    接下來會遇到 hexo 在生成的時候把這個 html 也放到模板裡面，所以我們要把他加入忽略清單裡面  
    在 `_config.yml` 裡面找到 `skip_render`  
    把直接檔名寫在後面或是用清單都可以
-    > 注意空白
+   > 注意空白
 
 ```yaml
 # 直接寫

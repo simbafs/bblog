@@ -1,7 +1,7 @@
 ---
 title: Mermaid Binary Tree
-publishDate: '2024-01-31'
-description: ''
+publishDate: "2024-01-31"
+description: ""
 tags:
   - mermaid
   - graph theorey
@@ -16,44 +16,46 @@ legacy: true
 
 {{< mermaid >}}
 graph
-    A --- B & C
-    B ~~~ 1:::hidden
-    B --- D
+A --- B & C
+B ~~~ 1:::hidden
+B --- D
 
 classDef hidden display: none;
 {{</mermaid>}}
 
-
 ## mermaid
+
 如果無腦用一般 [mermaid](https://mermaid.js.org) 的寫法會像這樣
 
 {{< mermaid source="yes">}}
 graph
-    A --- B & C
-    B --- D
+A --- B & C
+B --- D
 {{< /mermaid >}}
 
-`D` 就直直的放在 `B` 的下面，網路上找了一圈都沒看到可以把 `D` 往右靠的方法。最後，我想出來的方法是在 `D` 的左邊畫一個隱形的節點，用一條隱形的邊連起來，這樣 mermaid 就會自然的把 `D` 往右邊擺了。  
+`D` 就直直的放在 `B` 的下面，網路上找了一圈都沒看到可以把 `D` 往右靠的方法。最後，我想出來的方法是在 `D` 的左邊畫一個隱形的節點，用一條隱形的邊連起來，這樣 mermaid 就會自然的把 `D` 往右邊擺了。
 
 ### 隱形的邊
+
 首先，根據 [官方文件](https://mermaid.js.org/syntax/flowchart.html#an-invisible-link) 我們可以用 `~~~` 畫一條隱形的邊
 
 {{< mermaid source="yes" >}}
 graph
-    A --- B & C
-    B ~~~ E[hidden node]
-    B --- D
+A --- B & C
+B ~~~ E[hidden node]
+B --- D
 
 {{</ mermaid >}}
 
 ### 隱形的節點
+
 再來，要把 `E` 隱藏，[這篇問答](https://stackoverflow.com/questions/50268757/draw-arrow-from-node-to-nothing) 提供了很多方法，不過我最喜歡的是定義一個 class 的方式
 
 {{< mermaid source="yes" >}}
 graph
-    A --- B & C
-    B ~~~ 1:::hidden
-    B --- D
+A --- B & C
+B ~~~ 1:::hidden
+B --- D
 
 classDef hidden display: none;
 {{</ mermaid >}}

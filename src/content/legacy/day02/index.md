@@ -1,7 +1,7 @@
 ---
 title: Day 02 ：zsh 與 shell script
-publishDate: '2021-09-02'
-description: ''
+publishDate: "2021-09-02"
+description: ""
 tags:
   - cli
   - terminal
@@ -52,8 +52,8 @@ chsh -s $(where zsh)
 更換完 shell，**重新開啟終端機**，你應該會看到類似下面的畫面，我們選擇預設的 **(0)** 選項就可以了。如果沒有出現這個畫面的話就是預設的 shell **沒有切換成功**或是之前你**\*已經用過** zsh 了。
 
 | ![zsh-install](zsh-install.png) |
-| :---------------------------------------------------------------: |
-|                           zsh 安裝畫面                            |
+| :-----------------------------: |
+|          zsh 安裝畫面           |
 
 # zplug
 

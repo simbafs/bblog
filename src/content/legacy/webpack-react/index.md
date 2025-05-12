@@ -1,7 +1,7 @@
 ---
 title: Webpack Reactjs
-publishDate: '2020-06-28'
-description: ''
+publishDate: "2020-06-28"
+description: ""
 tags:
   - webpack
   - reactjs
@@ -51,9 +51,9 @@ npm i -D \
 
 ```json
 {
-	"dev": "webpack --mode development",
-	"watch": "webpack --mode development --watch",
-	"depoly": "webpack --mode production"
+  "dev": "webpack --mode development",
+  "watch": "webpack --mode development --watch",
+  "depoly": "webpack --mode production"
 }
 ```
 
@@ -65,17 +65,17 @@ npm i -D \
 
 ```js
 module.exports = {
-	module: {
-		rules: [
-			{
-				test: /\.(js|jsx)$/,
-				exclude: /node_modules/,
-				use: {
-					loader: 'babel-loader',
-				},
-			},
-		],
-	},
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+        },
+      },
+    ],
+  },
 };
 ```
 

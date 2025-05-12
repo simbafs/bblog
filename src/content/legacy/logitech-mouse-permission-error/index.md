@@ -1,7 +1,7 @@
 ---
 title: Logitech Mouse Permission Error
-publishDate: '2021-03-15'
-description: ''
+publishDate: "2021-03-15"
+description: ""
 tags:
   - ubuntu
   - logitech

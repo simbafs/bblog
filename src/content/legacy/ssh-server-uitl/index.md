@@ -1,7 +1,7 @@
 ---
 title: SSH Server Util
-publishDate: '2023-07-12'
-description: ''
+publishDate: "2023-07-12"
+description: ""
 tags:
   - golang
   - ssh
@@ -88,4 +88,5 @@ func ParsePayload(payload []byte) []string {
 ```
 
 ## 參考資料
-* https://pkg.go.dev/golang.org/x/crypto/ssh
+
+- https://pkg.go.dev/golang.org/x/crypto/ssh

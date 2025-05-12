@@ -1,7 +1,7 @@
 ---
 title: Mxlinux Boot with Systemd
-publishDate: '2020-09-05'
-description: ''
+publishDate: "2020-09-05"
+description: ""
 tags:
   - mxlinux
   - systemd

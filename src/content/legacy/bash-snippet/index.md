@@ -1,7 +1,7 @@
 ---
 title: Bash Snippet
-publishDate: '2023-02-25'
-description: ''
+publishDate: "2023-02-25"
+description: ""
 tags:
   - bash
   - snippet

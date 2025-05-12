@@ -1,7 +1,7 @@
 ---
 title: hCaptcha
-publishDate: '2021-01-05'
-description: ''
+publishDate: "2021-01-05"
+description: ""
 tags:
   - captcha
   - hCaptcha
@@ -48,19 +48,19 @@ legacy: true
    按照 README.md 的說明，應該是像這樣就可以了，當驗證通過時就會執行第二個 middleware
 
 ```js
-const router = require('express').Router();
-const captcha = require('express-hcaptcha');
+const router = require("express").Router();
+const captcha = require("express-hcaptcha");
 
 const SECRET = process.env.HCAPTCHA_SECRET_KEY;
 
 if (SECRET) {
-	// 這個 route 就是本來接收/處理 form 傳遞資料進來來的 route，只是加一個 captcha.middleware.validate(SECRET)
-	router.post('/', captcha.middleware.validate(SECRET), (req, res, next) => {
-		res.json({
-			message: 'verified!',
-			hcaptcha: req.hcaptcha,
-		});
-	});
+  // 這個 route 就是本來接收/處理 form 傳遞資料進來來的 route，只是加一個 captcha.middleware.validate(SECRET)
+  router.post("/", captcha.middleware.validate(SECRET), (req, res, next) => {
+    res.json({
+      message: "verified!",
+      hcaptcha: req.hcaptcha,
+    });
+  });
 }
 module.exports = router;
 ```
@@ -74,26 +74,26 @@ module.exports = router;
    在驗證之前先把 `req.body.h-captcha-token` 的內容塞進 `req.body.token` 裡面
 
 ```js
-const router = require('express').Router();
-const captcha = require('express-hcaptcha');
+const router = require("express").Router();
+const captcha = require("express-hcaptcha");
 
 const SECRET = process.env.HCAPTCHA_SECRET_KEY;
 
 if (SECRET) {
-	router.post(
-		'/',
-		(req, res, next) => {
-			req.body.token = req.body['h-captcha-response'];
-			next();
-		},
-		captcha.middleware.validate(SECRET),
-		(req, res, next) => {
-			res.json({
-				message: 'verified!',
-				hcaptcha: req.hcaptcha,
-			});
-		}
-	);
+  router.post(
+    "/",
+    (req, res, next) => {
+      req.body.token = req.body["h-captcha-response"];
+      next();
+    },
+    captcha.middleware.validate(SECRET),
+    (req, res, next) => {
+      res.json({
+        message: "verified!",
+        hcaptcha: req.hcaptcha,
+      });
+    },
+  );
 }
 
 module.exports = router;

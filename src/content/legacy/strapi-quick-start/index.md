@@ -1,7 +1,7 @@
 ---
 title: Strapi Quick Start
-publishDate: '2021-02-28'
-description: ''
+publishDate: "2021-02-28"
+description: ""
 tags:
   - node
   - nodejs
@@ -27,11 +27,11 @@ headless CMS 顧名思義是「無頭的 內容管理系統」，意思是沒有
 
 1. 他的界面完善
 2. 支援多種 DB
-    > MySQL >= 5.6  
-    > MariaDB >= 10.1  
-    > PostgreSQL >= 10  
-    > SQLite >= 3  
-    > MongoDB >= 3.6
+   > MySQL >= 5.6  
+   > MariaDB >= 10.1  
+   > PostgreSQL >= 10  
+   > SQLite >= 3  
+   > MongoDB >= 3.6
 3. 存取權限控制
 4. 外掛
 

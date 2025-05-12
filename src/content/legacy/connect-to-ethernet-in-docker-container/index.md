@@ -1,7 +1,7 @@
 ---
 title: Connect to Ethernet in Docker Container
-publishDate: '2020-11-28'
-description: ''
+publishDate: "2020-11-28"
+description: ""
 tags:
   - docker
   - linux

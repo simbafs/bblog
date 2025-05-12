@@ -1,7 +1,7 @@
 ---
 title: Mastodon
-publishDate: '2022-11-24'
-description: ''
+publishDate: "2022-11-24"
+description: ""
 tags:
   - mastodon
   - error

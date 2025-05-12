@@ -1,7 +1,7 @@
 ---
 title: 編譯時期產生縮圖
-publishDate: '2023-08-30'
-description: ''
+publishDate: "2023-08-30"
+description: ""
 tags:
   - og
   - svg
@@ -24,48 +24,48 @@ legacy: true
 
 ```js
 // api.jsx
-import satori from 'satori'
+import satori from "satori";
 
-const svg = await satori(<div style={{ color: 'black' }}>hello, world</div>, {
-	width: 600,
-	height: 400,
-	fonts: [
-		{
-			name: 'Roboto',
-			// Use `fs` (Node.js only) or `fetch` to read the font as Buffer/ArrayBuffer and provide `data` here.
-			data: robotoArrayBuffer,
-			weight: 400,
-			style: 'normal',
-		},
-	],
-})
+const svg = await satori(<div style={{ color: "black" }}>hello, world</div>, {
+  width: 600,
+  height: 400,
+  fonts: [
+    {
+      name: "Roboto",
+      // Use `fs` (Node.js only) or `fetch` to read the font as Buffer/ArrayBuffer and provide `data` here.
+      data: robotoArrayBuffer,
+      weight: 400,
+      style: "normal",
+    },
+  ],
+});
 ```
 
 看起來使用很簡單，就是把 jsx 丟進去，設定長寬跟至少一個字體就行了，注意！問題來了，我沒有從頭搞過 jsx，直接拿 `$ nodejs api.jsx` 一定會噴錯誤，有沒有可能我丟 HTML 字串進去也行呢？並且根據我的需求 **直接執行 node og.js 就會產生圖片** 進行一些修改：
 
 ```jsx
-const satori = require('satori')
-const fs = require('fs')
+const satori = require("satori");
+const fs = require("fs");
 
 const font = fs.readFileSync(
-	'/home/simba/.local/share/fonts/jf-openhuninn-1.1.ttf'
-)
+  "/home/simba/.local/share/fonts/jf-openhuninn-1.1.ttf",
+);
 
 satori
-	.default(`<div style={{ color: 'black' }}>hello, world</div>`, {
-		width: 600,
-		height: 400,
-		fonts: [
-			{
-				name: 'jf-openhuninn-1.1',
-				// Use `fs` (Node.js only) or `fetch` to read the font as Buffer/ArrayBuffer and provide `data` here.
-				data: font,
-				weight: 400,
-				style: 'normal',
-			},
-		],
-	})
-	.then(console.log)
+  .default(`<div style={{ color: 'black' }}>hello, world</div>`, {
+    width: 600,
+    height: 400,
+    fonts: [
+      {
+        name: "jf-openhuninn-1.1",
+        // Use `fs` (Node.js only) or `fetch` to read the font as Buffer/ArrayBuffer and provide `data` here.
+        data: font,
+        weight: 400,
+        style: "normal",
+      },
+    ],
+  })
+  .then(console.log);
 ```
 
 執行後看似很順利的產生了 svg
@@ -83,25 +83,25 @@ satori
 [satori-html](https://github.com/natemoo-re/satori-html) 是個函式庫專門用來填補 HTML 到 satori 之間間隔，他會吃 HTML 字串，然後吐一個 `react-elements-like object`，可以簡單的理解成 jsx 編譯後的輸出。來試試看：
 
 ```js
-const { html } = require('satori-html')
+const { html } = require("satori-html");
 
-console.log(html`<div style={{ color: 'black' }}>hello, world</div>`)
+console.log(html`<div style={{ color: 'black' }}>hello, world</div>`);
 ```
 
 執行！哇，他會吐一個 `Error [ERR_REQUIRE_ESM]: require() of ES Module satori-html@0.3.2/node_modules/satori-html/dist/index.js from index.js not supported.` 這樣的錯誤，不過還好，後面有給方法（讚啦）：`Instead change the require of index.js in index.js to a dynamic import() which is available in all CommonJS modules.`。好的，修改後長這樣：
 
 ```js
-;(async () => {
-	const { html } = await import('satori-html')
+(async () => {
+  const { html } = await import("satori-html");
 
-	console.log(
-		JSON.stringify(
-			html`<div style={{ color: 'black' }}>hello, world</div>`,
-			null,
-			2
-		)
-	)
-})()
+  console.log(
+    JSON.stringify(
+      html`<div style={{ color: 'black' }}>hello, world</div>`,
+      null,
+      2,
+    ),
+  );
+})();
 ```
 
 輸出長這樣
@@ -137,35 +137,35 @@ console.log(html`<div style={{ color: 'black' }}>hello, world</div>`)
 把上面兩個湊起來長這樣
 
 ```js
-const satori = require('satori')
-const fs = require('fs')
+const satori = require("satori");
+const fs = require("fs");
 
 const font = fs.readFileSync(
-	'/home/simba/.local/share/fonts/jf-openhuninn-1.1.ttf'
-)
+  "/home/simba/.local/share/fonts/jf-openhuninn-1.1.ttf",
+);
 
 async function getOg() {
-	const { html } = await import('satori-html')
+  const { html } = await import("satori-html");
 
-	const markup = html`<div style={{ color: 'black' }}>hello, world</div>`
+  const markup = html`<div style={{ color: 'black' }}>hello, world</div>`;
 
-	satori
-		.default(markup, {
-			width: 600,
-			height: 400,
-			fonts: [
-				{
-					name: 'jf-openhuninn-1.1',
-					data: font,
-					weight: 400,
-					style: 'normal',
-				},
-			],
-		})
-		.then(console.log)
+  satori
+    .default(markup, {
+      width: 600,
+      height: 400,
+      fonts: [
+        {
+          name: "jf-openhuninn-1.1",
+          data: font,
+          weight: 400,
+          style: "normal",
+        },
+      ],
+    })
+    .then(console.log);
 }
 
-getOg()
+getOg();
 ```
 
 吐出來的 svg 長這樣  
@@ -177,88 +177,91 @@ getOg()
 根據谷歌大神神諭，用 `@resvg/resvg-js` 可以把 svg 轉成 png，看範例：
 
 ```js
-const { promises } = require('fs')
-const { join } = require('path')
-const { Resvg } = require('@resvg/resvg-js')
+const { promises } = require("fs");
+const { join } = require("path");
+const { Resvg } = require("@resvg/resvg-js");
 
 async function main() {
-	const svg = await promises.readFile(join(__dirname, './text.svg'))
-	const opts = {
-		background: 'rgba(238, 235, 230, .9)',
-		fitTo: {
-			mode: 'width',
-			value: 1200,
-		},
-		font: {
-			fontFiles: ['./example/SourceHanSerifCN-Light-subset.ttf'], // Load custom fonts.
-			loadSystemFonts: false, // It will be faster to disable loading system fonts.
-			defaultFontFamily: 'Source Han Serif CN Light',
-		},
-	}
-	const resvg = new Resvg(svg, opts)
-	const pngData = resvg.render()
-	const pngBuffer = pngData.asPng()
+  const svg = await promises.readFile(join(__dirname, "./text.svg"));
+  const opts = {
+    background: "rgba(238, 235, 230, .9)",
+    fitTo: {
+      mode: "width",
+      value: 1200,
+    },
+    font: {
+      fontFiles: ["./example/SourceHanSerifCN-Light-subset.ttf"], // Load custom fonts.
+      loadSystemFonts: false, // It will be faster to disable loading system fonts.
+      defaultFontFamily: "Source Han Serif CN Light",
+    },
+  };
+  const resvg = new Resvg(svg, opts);
+  const pngData = resvg.render();
+  const pngBuffer = pngData.asPng();
 
-	console.info('Original SVG Size:', `${resvg.width} x ${resvg.height}`)
-	console.info('Output PNG Size  :', `${pngData.width} x ${pngData.height}`)
+  console.info("Original SVG Size:", `${resvg.width} x ${resvg.height}`);
+  console.info("Output PNG Size  :", `${pngData.width} x ${pngData.height}`);
 
-	await promises.writeFile(join(__dirname, './text-out.png'), pngBuffer)
+  await promises.writeFile(join(__dirname, "./text-out.png"), pngBuffer);
 }
 
-main()
+main();
 ```
 
-看來是丟 svg 和 `opt` 進去就可以了，來驗證看看吧！：  
+看來是丟 svg 和 `opt` 進去就可以了，來驗證看看吧！：
 
 ```js
-const satori = require('satori')
-const fs = require('fs')
-const { Resvg } = require('@resvg/resvg-js')
+const satori = require("satori");
+const fs = require("fs");
+const { Resvg } = require("@resvg/resvg-js");
 
 const font = fs.readFileSync(
-    '/home/simba/.local/share/fonts/jf-openhuninn-1.1.ttf'
-)
+  "/home/simba/.local/share/fonts/jf-openhuninn-1.1.ttf",
+);
 
 async function getOg() {
-    const { html } = await import('satori-html')
+  const { html } = await import("satori-html");
 
-    const markup = html`<div style={{ color: 'black' }}>hello, world</div>`
+  const markup = html`<div style={{ color: 'black' }}>hello, world</div>`;
 
-    return satori
-        .default(markup, {
-            width: 600,
-            height: 400,
-            fonts: [
-                {
-                    name: 'jf-openhuninn-1.1',
-                    data: font,
-                    weight: 400,
-                    style: 'normal',
-                },
-            ],
-        })
-        .then(svg => {
-            const png = new Resvg(svg, {
-                background: 'rgba(238, 235, 230, 0)',
-                fitTo: {
-                    mode: 'width',
-                    value: 600,
-                },
-            }).render().asPng()
-            return { svg, png }
-        })
+  return satori
+    .default(markup, {
+      width: 600,
+      height: 400,
+      fonts: [
+        {
+          name: "jf-openhuninn-1.1",
+          data: font,
+          weight: 400,
+          style: "normal",
+        },
+      ],
+    })
+    .then((svg) => {
+      const png = new Resvg(svg, {
+        background: "rgba(238, 235, 230, 0)",
+        fitTo: {
+          mode: "width",
+          value: 600,
+        },
+      })
+        .render()
+        .asPng();
+      return { svg, png };
+    });
 }
 
-getOg().then(({ png }) => fs.writeFileSync('og.png', png))
+getOg().then(({ png }) => fs.writeFileSync("og.png", png));
 ```
 
-輸出結果長這樣  
+輸出結果長這樣
 
 ![3.png](/images/og/3.png)
 
 嗯，很棒
 
 ## 打包
+
 核心程式碼都有了，接著我們只需要寫好範本、加上一些細節，躂啦！就完成了
 ![](/images/og/drawAnOwl.jpg)
 附上完成後的連結 [https://github.com/simbafs/og](https://github.com/simbafs/og)

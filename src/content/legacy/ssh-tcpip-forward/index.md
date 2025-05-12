@@ -1,7 +1,7 @@
 ---
 title: SSH TCP/IP Forward
-publishDate: '2023-07-14'
-description: ''
+publishDate: "2023-07-14"
+description: ""
 tags:
   - golang
   - ssh

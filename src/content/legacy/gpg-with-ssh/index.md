@@ -1,7 +1,7 @@
 ---
 title: GPG with SSH
-publishDate: '2022-12-06'
-description: ''
+publishDate: "2022-12-06"
+description: ""
 tags:
   - GPG
   - SSH
@@ -27,9 +27,9 @@ legacy: true
 
 以下步驟來自下面三個參考網址
 
--   https://blog.theerrorlog.com/using-gpg-zh.html (這裡有一些關於 gpg 的設定操做，不一定要像他說的那樣主密鑰分離，只是給一個操作說明)
--   https://blog.theerrorlog.com/using-gpg-keys-for-ssh-authentication-zh.html
--   https://gist.github.com/mcattarinussi/834fc4b641ff4572018d0c665e5a94d3 (gpg-agent 設定看這篇，這前面有非常詳細的 gpg ket 設定教學)
+- https://blog.theerrorlog.com/using-gpg-zh.html (這裡有一些關於 gpg 的設定操做，不一定要像他說的那樣主密鑰分離，只是給一個操作說明)
+- https://blog.theerrorlog.com/using-gpg-keys-for-ssh-authentication-zh.html
+- https://gist.github.com/mcattarinussi/834fc4b641ff4572018d0c665e5a94d3 (gpg-agent 設定看這篇，這前面有非常詳細的 gpg ket 設定教學)
 
 1. 根據第二個參考資料的說明產生可以用於 ssh 驗證的 gpg subkey（有`[A]`）
 2. 取得 ssh 格式的公鑰 `gpg2 --export-ssh-key you@example.com`

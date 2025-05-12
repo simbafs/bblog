@@ -1,7 +1,7 @@
 ---
 title: Merge Two Repo
-publishDate: '2022-10-18'
-description: ''
+publishDate: "2022-10-18"
+description: ""
 tags:
   - git
   - merge
@@ -152,6 +152,6 @@ $ git remote remove a
 
 ## 參考資料
 
--   https://stackoverflow.com/questions/1425892/how-do-you-merge-two-git-repositories
--   https://gist.github.com/x-yuri/6161d90d1af8ebac6e560bcef548c1c3
--   https://github.com/newren/git-filter-repo
+- https://stackoverflow.com/questions/1425892/how-do-you-merge-two-git-repositories
+- https://gist.github.com/x-yuri/6161d90d1af8ebac6e560bcef548c1c3
+- https://github.com/newren/git-filter-repo

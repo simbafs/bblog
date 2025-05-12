@@ -1,7 +1,7 @@
 ---
 title: Golang Parse All Files In Directory Into Templates
-publishDate: '2021-07-30'
-description: ''
+publishDate: "2021-07-30"
+description: ""
 tags:
   - golang
   - template

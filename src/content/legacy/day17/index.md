@@ -1,7 +1,7 @@
 ---
 title: Day 17：coc.nvim 設定下集
-publishDate: '2021-09-17'
-description: ''
+publishDate: "2021-09-17"
+description: ""
 tags:
   - cli
   - terminal

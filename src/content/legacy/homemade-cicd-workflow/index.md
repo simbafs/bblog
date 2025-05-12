@@ -1,7 +1,7 @@
 ---
 title: Homemade CI/CD Workflow
-publishDate: '2023-08-07'
-description: ''
+publishDate: "2023-08-07"
+description: ""
 tags:
   - CICD
   - devops
@@ -30,7 +30,7 @@ legacy: true
 ```yaml
 - name: build image
   run: |
-      docker build . -t ghcr.io/simbafs/coscup-attendance:latest -t ghcr.io/simbafs/coscup-attendance:${{ steps.vars.outputs.tag }}
+    docker build . -t ghcr.io/simbafs/coscup-attendance:latest -t ghcr.io/simbafs/coscup-attendance:${{ steps.vars.outputs.tag }}
 ```
 
 裡面有個奇怪的東西 `${{ steps.vars.outputs.tag }}`，這是代表 GitHub Action 某個步驟的產出變數 `tag`，這是為了幫 build 出來的 image 加上 tag，所以開支線任務:「找出 tag」
@@ -52,12 +52,12 @@ tag 不會憑空生出來，所以我們需要一個來源，我選擇 git tag�
 我們已經決定要推上 GHCR 了，首先一定要先登入才能推送的。
 
 ```yaml
-- name: 'Login to GitHub Container Registry'
+- name: "Login to GitHub Container Registry"
   uses: docker/login-action@v1
   with:
-      registry: ghcr.io
-      username: ${{ github.actor }}
-      password: ${{ secrets.GITHUB_TOKEN }}
+    registry: ghcr.io
+    username: ${{ github.actor }}
+    password: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 注意這裡 `${{ github.actor }}` 和 `${{ secrets.GITHUB_TOKEN }}` 是不需要設定的，他會自己代入該代的值，不過要去設定裡面設定調整，讓 Action 可以寫入 package，位置在 `settings > actions > general > Workflow permissions > read and write permissions`
@@ -69,8 +69,8 @@ push 就很簡單，一條指令，不過我不確定怎麼把兩個 tag 都推�
 ```yaml
 - name: push image
   run: |
-      docker push ghcr.io/simbafs/coscup-attendance:${{ steps.vars.outputs.tag }}
-      docker push ghcr.io/simbafs/coscup-attendance:latest
+    docker push ghcr.io/simbafs/coscup-attendance:${{ steps.vars.outputs.tag }}
+    docker push ghcr.io/simbafs/coscup-attendance:latest
 ```
 
 > GitHub Action 還沒完喔！
@@ -84,25 +84,25 @@ webhook 說穿了就是設定收到 http request 後要做什麼，~~用 bash �
 首先是 docker-compose.yml
 
 ```yaml
-version: '3.3'
+version: "3.3"
 services:
-    webhook:
-        image: roxedus/webhook
-        container_name: webhook
-        environment:
-            - PUID=0
-            - PGID=0
-            - TZ=Asiz/Taipei
-            - EXTRA_PARAM=-hotreload -verbose #optional
-        volumes:
-            - ./hooks.json:/config/hooks/hooks.json
-            - ./script/:/var/webhook/
-            - /volume1/docker/:/var/webhook/docker/
-            - /var/run/docker.sock:/var/run/docker.sock
-            - /usr/local/bin/docker:/usr/local/bin/docker
-            - /usr/local/bin/docker-compose:/usr/local/bin/docker-compose
-        ports:
-            - 5748:9000
+  webhook:
+    image: roxedus/webhook
+    container_name: webhook
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Asiz/Taipei
+      - EXTRA_PARAM=-hotreload -verbose #optional
+    volumes:
+      - ./hooks.json:/config/hooks/hooks.json
+      - ./script/:/var/webhook/
+      - /volume1/docker/:/var/webhook/docker/
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/local/bin/docker:/usr/local/bin/docker
+      - /usr/local/bin/docker-compose:/usr/local/bin/docker-compose
+    ports:
+      - 5748:9000
 ```
 
 這裡 volume 掛了一堆東西，第一個是設定檔，第二個是方便放 script 和 log，第三個是為了到要更新的 docker 專案目錄執行 `docker-compose`，後面三個都是為了可以執行 host 上的 docker 指令。
@@ -113,21 +113,21 @@ services:
 
 ```json
 [
-	{
-		"id": "coscup-attendance",
-		"execute-command": "/var/webhook/docker/coscup/update.sh",
-		"command-working-directory": "/var/webhook/docker/coscup/",
-		"trigger-rule": {
-			"match": {
-				"type": "value",
-				"value": "random key",
-				"parameter": {
-					"source": "payload",
-					"name": "key"
-				}
-			}
-		}
-	}
+  {
+    "id": "coscup-attendance",
+    "execute-command": "/var/webhook/docker/coscup/update.sh",
+    "command-working-directory": "/var/webhook/docker/coscup/",
+    "trigger-rule": {
+      "match": {
+        "type": "value",
+        "value": "random key",
+        "parameter": {
+          "source": "payload",
+          "name": "key"
+        }
+      }
+    }
+  }
 ]
 ```
 
@@ -156,7 +156,7 @@ cd /var/webhook/docker/coscup
 ```yaml
 - name: trigger webhook
   run: |
-      curl -XPOST --header 'Content-Type: application/json'  -d'{"key": "${{ secrets.WEBHOOK_KEY }}"}' "https://webhook.simbafs.cc/hooks/coscup-attendance"
+    curl -XPOST --header 'Content-Type: application/json'  -d'{"key": "${{ secrets.WEBHOOK_KEY }}"}' "https://webhook.simbafs.cc/hooks/coscup-attendance"
 ```
 
 這裡把 `"random key` 拉出來放到 secrets 裡面是因為我不希望隨便一個人都能重啟 docker container，雖然不會怎樣但是服務會被中斷，所以才設計這個密碼，至於為什麼不用 hmac 驗證呢？如果是 `hooks.json` 洩漏，那麼有沒有驗證都沒差了，如果是封包內容被抓到，也是沒差了，因為我的 payload 每次都一樣，如果 **webhook** 能驗證時間之類的才會有用，所以單純驗 value 就可以了，而且我都是走 https，要洩漏也沒那麼容易。
@@ -169,45 +169,45 @@ cd /var/webhook/docker/coscup
 name: Deploy Images to GHCR
 
 on:
-    push:
-        tags:
-            - 'v*.*.*'
+  push:
+    tags:
+      - "v*.*.*"
 
 jobs:
-    build-and-push:
-        runs-on: ubuntu-latest
-        steps:
-            - name: 'Checkout GitHub Action'
-              uses: actions/checkout@main
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout GitHub Action"
+        uses: actions/checkout@main
 
-            - name: 'Login to GitHub Container Registry'
-              uses: docker/login-action@v1
-              with:
-                  registry: ghcr.io
-                  username: ${{ github.actor }}
-                  password: ${{ secrets.GITHUB_TOKEN }}
+      - name: "Login to GitHub Container Registry"
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
-            - name: Set env
-              id: vars
-              run: echo "tag=${GITHUB_REF#refs/*/}" >> $GITHUB_OUTPUT
+      - name: Set env
+        id: vars
+        run: echo "tag=${GITHUB_REF#refs/*/}" >> $GITHUB_OUTPUT
 
-            - name: echo
-              run: echo ${{ steps.vars.outputs.tag }}
+      - name: echo
+        run: echo ${{ steps.vars.outputs.tag }}
 
-            - name: build image
-              run: |
-                  docker build . -t ghcr.io/simbafs/coscup-attendance:latest -t ghcr.io/simbafs/coscup-attendance:${{ steps.vars.outputs.tag }}
+      - name: build image
+        run: |
+          docker build . -t ghcr.io/simbafs/coscup-attendance:latest -t ghcr.io/simbafs/coscup-attendance:${{ steps.vars.outputs.tag }}
 
-            - name: push image
-              run: |
-                  docker push ghcr.io/simbafs/coscup-attendance:${{ steps.vars.outputs.tag }}
-                  docker push ghcr.io/simbafs/coscup-attendance:latest
+      - name: push image
+        run: |
+          docker push ghcr.io/simbafs/coscup-attendance:${{ steps.vars.outputs.tag }}
+          docker push ghcr.io/simbafs/coscup-attendance:latest
 
-    cd:
-        runs-on: ubuntu-latest
-        needs: [build-and-push]
-        steps:
-            - name: trigger webhook
-              run: |
-                  curl -XPOST --header 'Content-Type: application/json'  -d'{"key": "${{ secrets.WEBHOOK_KEY }}"}' "https://webhook.simbafs.cc/hooks/coscup-attendance"
+  cd:
+    runs-on: ubuntu-latest
+    needs: [build-and-push]
+    steps:
+      - name: trigger webhook
+        run: |
+          curl -XPOST --header 'Content-Type: application/json'  -d'{"key": "${{ secrets.WEBHOOK_KEY }}"}' "https://webhook.simbafs.cc/hooks/coscup-attendance"
 ```

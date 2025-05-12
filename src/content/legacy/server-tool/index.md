@@ -1,7 +1,7 @@
 ---
 title: Server Tool
-publishDate: '2020-02-16'
-description: ''
+publishDate: "2020-02-16"
+description: ""
 tags:
   - bash
   - RegEx

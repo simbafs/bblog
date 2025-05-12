@@ -1,7 +1,7 @@
 ---
 title: Nginx UI
-publishDate: '2020-06-23'
-description: ''
+publishDate: "2020-06-23"
+description: ""
 tags:
   - nginx linux
   - linux

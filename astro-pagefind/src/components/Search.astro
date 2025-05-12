@@ -10,7 +10,8 @@ export interface Props {
 }
 
 const { id, className, query, uiOptions = {} } = Astro.props;
-const bundlePath = uiOptions.bundlePath || path.join(import.meta.env.BASE_URL, "pagefind/");
+const bundlePath =
+  uiOptions.bundlePath || path.join(import.meta.env.BASE_URL, "pagefind/");
 ---
 
 <div
@@ -27,7 +28,9 @@ const bundlePath = uiOptions.bundlePath || path.join(import.meta.env.BASE_URL, "
 
   function initPageFind() {
     const allSelector = "[data-pagefind-ui]";
-    for (const el of document.querySelectorAll(`${allSelector}.pagefind-init`)) {
+    for (const el of document.querySelectorAll(
+      `${allSelector}.pagefind-init`,
+    )) {
       const elSelector = [
         ...(el.id ? [`#${el.id}`] : []),
         ...[...el.classList.values()].map((c) => `.${c}`),

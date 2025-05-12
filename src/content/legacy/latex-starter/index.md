@@ -1,7 +1,7 @@
 ---
 title: LaTeX Starter
-publishDate: '2021-12-22'
-description: ''
+publishDate: "2021-12-22"
+description: ""
 tags:
   - latex
   - other
@@ -12,7 +12,7 @@ legacy: true
 
 LaTeX 是一老牌的排版系統，基本的概念是內容與呈現分離，在撰寫內容時不用管排版（所以你就不會擔心移動圖片一咪咪整份文件就跑版了）。除了排版，LaTeX 還很擅長輸出各種莫名其妙的東西，像是超複雜的數學式、象棋棋譜、化學結構......
 
-|           ![莫名其妙排版範例](latex-example.png)            |
+|                      ![莫名其妙排版範例](latex-example.png)                       |
 | :-------------------------------------------------------------------------------: |
 | credit:[https://zh.wikipedia.org/wiki/LaTeX](https://zh.wikipedia.org/wiki/LaTeX) |
 

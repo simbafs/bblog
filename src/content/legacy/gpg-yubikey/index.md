@@ -1,7 +1,7 @@
 ---
 title: GPG and Yubikey
-publishDate: '2022-12-12'
-description: ''
+publishDate: "2022-12-12"
+description: ""
 tags:
   - GPG
   - SSH
@@ -31,9 +31,9 @@ GPG 中每個人都有一個鑰匙圈（keyring），就像你包包裡的鑰匙
 
 前面提到，主金鑰的功能是身份證明，但是怎樣的操作是屬於身份證明呢？根據這 [這篇問答](https://security.stackexchange.com/questions/73679/which-actions-does-the-gnupg-certify-capability-permit) 和 [RFC 4880](https://www.rfc-editor.org/rfc/rfc4880#section-5.2.1)，以下操作都是屬於身份證明
 
--   對某個使用者的公鑰簽章（信任某個使用者，相關內容在信任網章節）
--   簽發 binding signature（這裡分成 subkey binding signature 和 primary binding signature，但我還沒研究出差別）
--   簽發金鑰撤銷金鑰（當你的子密鑰洩漏時宣告用）
+- 對某個使用者的公鑰簽章（信任某個使用者，相關內容在信任網章節）
+- 簽發 binding signature（這裡分成 subkey binding signature 和 primary binding signature，但我還沒研究出差別）
+- 簽發金鑰撤銷金鑰（當你的子密鑰洩漏時宣告用）
 
 簡單來說，就是產生、撤銷子金鑰以及和「信任」有關的操作都算是「身份證明」(Certify)
 
@@ -51,13 +51,13 @@ GPG 中每個人都有一個鑰匙圈（keyring），就像你包包裡的鑰匙
 
 fingerprint 和 keygrip 都是要對於金鑰對識別，他們都是把要識別的公鑰對拿去 hash，功能是可以快速比較兩把 key 是否相同，例如你從網路上找到某個人的公鑰，可以用 fingerprint 和那個人比對是不是同一把 key（fingerprint 40 個字元，完整的 key 可能有上千個字元）。看到這裡你會覺得 fingerprint 和 keygrip 很像，的確，他們的差異只差在包含的資訊不一樣
 
--   fingerprint
-    -   公鑰
-    -   建立日期
-    -   演算法
-    -   公鑰 packet 版本（儲存公鑰的資料結構）
--   keygrip
-    -   公鑰
+- fingerprint
+  - 公鑰
+  - 建立日期
+  - 演算法
+  - 公鑰 packet 版本（儲存公鑰的資料結構）
+- keygrip
+  - 公鑰
 
 你會發現，keygrip 只包含公鑰，而 fingerprint 則是包含了一堆 gpg 內部資訊，因此我們可以說 keygrip 是「和 GPG 無關」的識別。
 
@@ -87,9 +87,9 @@ fingerprint 和 keygrip 都是要對於金鑰對識別，他們都是把要識�
 目前為止的機制，我們要確認公鑰有效需要整條信任鍊之間都是「完整信任」且都被前一個確認是有效，但是這樣缺乏彈性。GPG 採用一個巧妙的方法來擴展目前的機制，一把公鑰如果滿足以下條件，就會被認定是有效的：
 
 1. 被足夠多的有效的人（公鑰是有效的）簽章，這意味下面條件至少要滿足一個
-    1. 你親自對他簽章
-    2. 被一個「完整信任」的人簽章
-    3. 被三個「半信半疑」的人簽章
+   1. 你親自對他簽章
+   2. 被一個「完整信任」的人簽章
+   3. 被三個「半信半疑」的人簽章
 2. 從自己出發到那把公鑰的最短路徑小於等於五步
 
 > 在實際使用時需要幾個半信半疑的人以及路徑長度限制都是可以調整的，這裡寫的是 GPG 預設的值

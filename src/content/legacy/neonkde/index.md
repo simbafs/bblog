@@ -1,7 +1,7 @@
 ---
 title: NeonKDE
-publishDate: '2023-08-29'
-description: ''
+publishDate: "2023-08-29"
+description: ""
 tags:
   - kde
   - linux
@@ -15,6 +15,7 @@ legacy: true
 # NeonKDE
 
 ## git sign with gpg
+
 ```
 export GPG_TTY=$(tty)
 ```

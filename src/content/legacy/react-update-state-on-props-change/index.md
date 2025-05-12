@@ -1,7 +1,7 @@
 ---
 title: Reactjs Update State on Props Change
-publishDate: '2020-07-12'
-description: ''
+publishDate: "2020-07-12"
+description: ""
 tags:
   - reactjs
   - state

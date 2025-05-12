@@ -1,7 +1,7 @@
 ---
 title: docker commit
-publishDate: '2020-11-27'
-description: ''
+publishDate: "2020-11-27"
+description: ""
 tags:
   - docker
   - linux

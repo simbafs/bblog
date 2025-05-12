@@ -1,7 +1,7 @@
 ---
 title: Solarized
-publishDate: '2022-06-15'
-description: ''
+publishDate: "2022-06-15"
+description: ""
 tags:
   - vim
   - colorscheme

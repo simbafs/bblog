@@ -1,7 +1,7 @@
 ---
 title: 不同「邊數」的平面
-publishDate: '2022-06-11'
-description: ''
+publishDate: "2022-06-11"
+description: ""
 tags:
   - buckyball
   - other

@@ -1,7 +1,7 @@
 ---
 title: Bubbletea
-publishDate: '2023-01-08'
-description: ''
+publishDate: "2023-01-08"
+description: ""
 tags:
   - bubbletea
   - cli

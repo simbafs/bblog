@@ -1,7 +1,7 @@
 ---
 title: Openssl DES
-publishDate: '2022-10-02'
-description: ''
+publishDate: "2022-10-02"
+description: ""
 tags:
   - cryptography
   - encryption
@@ -45,5 +45,5 @@ openssl 的選項都是一個 `-`，不像一般的 GNU 命令分長選項和短
 
 ## 參考資料
 
--   https://wiki.openssl.org/index.php/Enc
--   https://github.com/openssl/openssl/issues/12906
+- https://wiki.openssl.org/index.php/Enc
+- https://github.com/openssl/openssl/issues/12906

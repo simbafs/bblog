@@ -1,7 +1,7 @@
 ---
 title: Day 14：vim-plug
-publishDate: '2021-09-14'
-description: ''
+publishDate: "2021-09-14"
+description: ""
 tags:
   - cli
   - terminal

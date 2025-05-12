@@ -1,7 +1,7 @@
 ---
 title: hexo-installation
-publishDate: '2020-02-10'
-description: ''
+publishDate: "2020-02-10"
+description: ""
 tags:
   - hexo
 legacy: true

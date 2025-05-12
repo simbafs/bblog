@@ -1,7 +1,7 @@
 ---
 title: Audo Depoly by Github Action
-publishDate: '2020-02-11'
-description: ''
+publishDate: "2020-02-11"
+description: ""
 tags:
   - hexo
   - github action
@@ -20,60 +20,60 @@ legacy: true
 name: HEXO CI
 
 on:
-    push:
-        branches:
-            - master
+  push:
+    branches:
+      - master
 
 jobs:
-    build:
-        runs-on: ubuntu-latest
-        strategy:
-            matrix:
-                node-version: [12.x]
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
 
-        steps:
-            - uses: actions/checkout@v1
+    steps:
+      - uses: actions/checkout@v1
 
-            - name: Use Node.js ${{ matrix.node-version }}
-              uses: actions/setup-node@v1
-              with:
-                  node-version: ${{ matrix.node-version }}
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
 
-            - name: Configuration environment
-              env:
-                  HEXO_DEPLOY_PRI: ${{secrets.HEXO_DEPLOY_PRI}}
-              run: |
-                  mkdir -p ~/.ssh/
-                  echo "$HEXO_DEPLOY_PRI" | tr -d '\r' > ~/.ssh/id_rsa
-                  chmod 600 ~/.ssh/id_rsa
-                  ssh-keyscan github.com >> ~/.ssh/known_hosts
-                  git config --global user.name "simbafs"
-                  git config --global user.email "simbafsgmail.com"
-            - name: Install dependencies
-              run: |
-                  npm i -g hexo-cli
-                  npm i -S hexo 
-                  npm i
-            - name: hexo
-              run: |
-                  git checkout hexo
-            - name: config
-              run: |
-                  hexo config
-            - name: test hexo
-              run: |
-                  hexo new post telsst
-            - name: list
-              run: |
-                  ls source/_posts
-                  PWD=$(pwd) hexo list post
-            - name: clean
-              run: |
-                  hexo clean
-            - name: generate
-              run: |
-                  hexo g
-            - name: deploy
-              run: |
-                  hexo d
+      - name: Configuration environment
+        env:
+          HEXO_DEPLOY_PRI: ${{secrets.HEXO_DEPLOY_PRI}}
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$HEXO_DEPLOY_PRI" | tr -d '\r' > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          git config --global user.name "simbafs"
+          git config --global user.email "simbafsgmail.com"
+      - name: Install dependencies
+        run: |
+          npm i -g hexo-cli
+          npm i -S hexo 
+          npm i
+      - name: hexo
+        run: |
+          git checkout hexo
+      - name: config
+        run: |
+          hexo config
+      - name: test hexo
+        run: |
+          hexo new post telsst
+      - name: list
+        run: |
+          ls source/_posts
+          PWD=$(pwd) hexo list post
+      - name: clean
+        run: |
+          hexo clean
+      - name: generate
+        run: |
+          hexo g
+      - name: deploy
+        run: |
+          hexo d
 ```

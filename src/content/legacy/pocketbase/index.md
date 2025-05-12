@@ -1,7 +1,7 @@
 ---
 title: PocketBase
-publishDate: '2023-08-26'
-description: ''
+publishDate: "2023-08-26"
+description: ""
 tags:
   - pocketbase
   - sqlite
@@ -31,7 +31,7 @@ legacy: true
 
 ## 設定 Collection
 
-啟動伺服器後開啟管理頁面 [http://localhost:8090/_](http://localhost:8090/_)，他會叫你設定第一個管理員帳號密碼，進入後會發現已經預設一個 users Collection（以下沿用 sqlite 稱呼，稱之為表格），那麼我們就保留他吧。
+啟動伺服器後開啟管理頁面 [http://localhost:8090/\_](http://localhost:8090/_)，他會叫你設定第一個管理員帳號密碼，進入後會發現已經預設一個 users Collection（以下沿用 sqlite 稱呼，稱之為表格），那麼我們就保留他吧。
 
 ### 表格種類
 
@@ -61,37 +61,37 @@ pocketbase 官方有提供一個 [JS SDK](https://github.com/pocketbase/js-sdk) 
 
 ```tsx
 export default function Home() {
-  const [pb] = useState(new Pocketbase('http://localhost:8090'))
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [pb] = useState(new Pocketbase("http://localhost:8090"));
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleLogin = () => {
-    pb.collection('users')
+    pb.collection("users")
       .authWithPassword(email, password)
-      .then(console.log, console.error)
-  }
+      .then(console.log, console.error);
+  };
 
   return (
-    <div className="h-screen max-w-[800px] mx-auto flex flex-col">
+    <div className="mx-auto flex h-screen max-w-[800px] flex-col">
       <input
         className={input()}
         type="email"
         value={email}
-        onChange={e => setEmail(e.target.value)}
+        onChange={(e) => setEmail(e.target.value)}
         placeholder="email"
       />
       <input
         className={input()}
         type="password"
         value={password}
-        onChange={e => setPassword(e.target.value)}
+        onChange={(e) => setPassword(e.target.value)}
         placeholder="password"
       />
       <button className={input()} type="button" onClick={handleLogin}>
         Login
       </button>
     </div>
-  )
+  );
 }
 ```
 
@@ -108,16 +108,16 @@ pocketbase 會自動維護 `authStore`，預設是存在 localStorage 裡面，�
 
 ```tsx
 function usePosts(pb: Pocketbase) {
-  type Post = PostResponse
-  const [post, setPost] = useState<Post[]>([])
+  type Post = PostResponse;
+  const [post, setPost] = useState<Post[]>([]);
 
   useEffect(() => {
-    pb.collection('posts')
+    pb.collection("posts")
       .getList<Post>()
-      .then(result => setPost(result.items.reverse()))
-  }, [pb])
+      .then((result) => setPost(result.items.reverse()));
+  }, [pb]);
 
-  return posts
+  return posts;
 }
 ```
 
@@ -127,38 +127,38 @@ function usePosts(pb: Pocketbase) {
 
 ```tsx
 function usePosts(pb: Pocketbase) {
-  type Post = PostsResponse
+  type Post = PostsResponse;
   const [posts, updatePosts] = useReducer(
     (state: Post[], action: Post | Post[]) => {
       if (Array.isArray(action)) {
-        return action
+        return action;
       }
-      return [action, ...state]
+      return [action, ...state];
     },
-    []
-  )
+    [],
+  );
 
   useEffect(() => {
-    pb.collection('posts')
+    pb.collection("posts")
       .getList<Post>()
-      .then(result => updatePosts(result.items.reverse()))
+      .then((result) => updatePosts(result.items.reverse()))
       .then(() =>
-        pb.realtime.subscribe('posts', e => {
+        pb.realtime.subscribe("posts", (e) => {
           switch (e.action) {
-            case 'create':
-              updatePosts(e.record)
-              break
+            case "create":
+              updatePosts(e.record);
+              break;
             default:
-              console.log(e)
+              console.log(e);
           }
-        })
-      )
+        }),
+      );
     return () => {
-      pb.realtime.unsubscribe()
-    }
-  }, [pb])
+      pb.realtime.unsubscribe();
+    };
+  }, [pb]);
 
-  return posts
+  return posts;
 }
 ```
 
@@ -170,31 +170,31 @@ function usePosts(pb: Pocketbase) {
 
 ```tsx
 export default function Home() {
-  const [pb] = useState(new Pocketbase('http://localhost:8090'))
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const posts = usePosts(pb)
+  const [pb] = useState(new Pocketbase("http://localhost:8090"));
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const posts = usePosts(pb);
 
   const handleLogin = () => {
-    pb.collection('users')
+    pb.collection("users")
       .authWithPassword(email, password)
-      .then(console.log, console.error)
-  }
+      .then(console.log, console.error);
+  };
 
   return (
-    <div className="h-screen max-w-[800px] mx-auto flex flex-col">
+    <div className="mx-auto flex h-screen max-w-[800px] flex-col">
       <input
         className={input()}
         type="email"
         value={email}
-        onChange={e => setEmail(e.target.value)}
+        onChange={(e) => setEmail(e.target.value)}
         placeholder="email"
       />
       <input
         className={input()}
         type="password"
         value={password}
-        onChange={e => setPassword(e.target.value)}
+        onChange={(e) => setPassword(e.target.value)}
         placeholder="password"
       />
       <button className={input()} type="button" onClick={handleLogin}>
@@ -203,13 +203,13 @@ export default function Home() {
 
       <hr />
 
-      {posts.map(item => (
-        <div className="m-2 p-2 border-2 border-stone-400 rounded-lg">
+      {posts.map((item) => (
+        <div className="m-2 rounded-lg border-2 border-stone-400 p-2">
           <p>{item.content}</p>
         </div>
       ))}
     </div>
-  )
+  );
 }
 ```
 
@@ -221,31 +221,31 @@ export default function Home() {
 發文就是去戳 post 的 create API，這部份也很簡單，加入一個 `<textarea>`，按下後把內容送出去就好，這部份長這樣
 
 ```tsx
-const [content, setContent] = useState('')
+const [content, setContent] = useState("");
 
 const handleSend = () => {
-  pb.collection('posts')
+  pb.collection("posts")
     .create({
       author: pb.authStore.model?.id,
       content,
     })
-    .then(() => setContent(''))
-    .then(console.log, console.error)
-}
+    .then(() => setContent(""))
+    .then(console.log, console.error);
+};
 
 return (
   <>
     <textarea
       className={input()}
       value={content}
-      onChange={e => setContent(e.target.value)}
+      onChange={(e) => setContent(e.target.value)}
       placeholder="content"
     />
     <button className={input()} onClick={handleSend} type="button">
       Send
     </button>
   </>
-)
+);
 ```
 
 ### 登入後隱藏
@@ -302,46 +302,46 @@ return {
 ```tsx
 function usePosts(pb: Pocketbase) {
   type Post = PostsResponse<{
-    author: UsersResponse
-  }>
+    author: UsersResponse;
+  }>;
   const [posts, updatePosts] = useReducer(
     (state: Post[], action: Post | Post[]) => {
       if (Array.isArray(action)) {
-        return action
+        return action;
       }
-      return [action, ...state]
+      return [action, ...state];
     },
-    []
-  )
+    [],
+  );
 
   useEffect(() => {
-    pb.collection('posts')
+    pb.collection("posts")
       .getList<Post>(1, 50, {
-        expand: 'author',
+        expand: "author",
       })
-      .then(result => updatePosts(result.items.reverse()))
+      .then((result) => updatePosts(result.items.reverse()))
       .then(() =>
-        pb.realtime.subscribe('posts', e => {
+        pb.realtime.subscribe("posts", (e) => {
           switch (e.action) {
-            case 'create':
+            case "create":
               // updatePosts(e.record)
-              pb.collection('posts')
+              pb.collection("posts")
                 .getOne<Post>(e.record.id, {
-                  expand: 'author',
+                  expand: "author",
                 })
-                .then(e => updatePosts(e))
-              break
+                .then((e) => updatePosts(e));
+              break;
             default:
-              console.log(e)
+              console.log(e);
           }
-        })
-      )
+        }),
+      );
     return () => {
-      pb.realtime.unsubscribe()
-    }
-  }, [pb])
+      pb.realtime.unsubscribe();
+    };
+  }, [pb]);
 
-  return posts
+  return posts;
 }
 ```
 
@@ -349,20 +349,19 @@ function usePosts(pb: Pocketbase) {
 
 ```tsx
 {
-  posts.map(item => (
-    <div className="m-2 p-2 border-2 border-stone-400 rounded-lg">
+  posts.map((item) => (
+    <div className="m-2 rounded-lg border-2 border-stone-400 p-2">
       <p>{item.content}</p>
       <hr />
-      <p className="text-sm text-stone-400">
-        by {item.expand?.author.name}
-      </p>
+      <p className="text-sm text-stone-400">by {item.expand?.author.name}</p>
     </div>
-  ))
+  ));
 }
 ```
 
 ### 權限
-目前看起來很棒，但是你會發現用其他帳號登入的話就會 `expand` 就會失敗，是因為預設的 users collection `list` 和 `view` 都是只有自己才能看，所以我們需要把他刪掉變成空字串，這樣才可以讓其他人也抓到 `expand` 
+
+目前看起來很棒，但是你會發現用其他帳號登入的話就會 `expand` 就會失敗，是因為預設的 users collection `list` 和 `view` 都是只有自己才能看，所以我們需要把他刪掉變成空字串，這樣才可以讓其他人也抓到 `expand`
 
 ## 最後成果
 

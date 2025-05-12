@@ -1,7 +1,7 @@
 ---
 title: docker login error
-publishDate: '2020-12-05'
-description: ''
+publishDate: "2020-12-05"
+description: ""
 tags:
   - docker
   - linux
@@ -45,6 +45,6 @@ docker login
 
 ## 參考連結
 
--   [https://github.com/docker/docker-credential-helpers/issues/102#issuecomment-388634452](https://github.com/docker/docker-credential-helpers/issues/102#issuecomment-388634452)
--   [https://stackoverflow.com/questions/50151833/cannot-login-to-docker-account/52881198#52881198](https://stackoverflow.com/questions/50151833/cannot-login-to-docker-account/52881198#52881198)
--   [https://gist.github.com/dataday/3c267be29e32573829c4781c99ea3395](https://gist.github.com/dataday/3c267be29e32573829c4781c99ea3395)
+- [https://github.com/docker/docker-credential-helpers/issues/102#issuecomment-388634452](https://github.com/docker/docker-credential-helpers/issues/102#issuecomment-388634452)
+- [https://stackoverflow.com/questions/50151833/cannot-login-to-docker-account/52881198#52881198](https://stackoverflow.com/questions/50151833/cannot-login-to-docker-account/52881198#52881198)
+- [https://gist.github.com/dataday/3c267be29e32573829c4781c99ea3395](https://gist.github.com/dataday/3c267be29e32573829c4781c99ea3395)

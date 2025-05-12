@@ -1,7 +1,7 @@
 ---
 title: Unix Socket
-publishDate: '2020-02-23'
-description: ''
+publishDate: "2020-02-23"
+description: ""
 tags:
   - unix socket
   - node
@@ -24,14 +24,14 @@ legacy: true
 像這樣
 
 ```js
-const express = require('express');
+const express = require("express");
 const app = express();
 
-app.get('/', (req, res) => {
-	res.send('Hello World\n');
+app.get("/", (req, res) => {
+  res.send("Hello World\n");
 });
 
-app.listen('/tmp/express.sock');
+app.listen("/tmp/express.sock");
 ```
 
 ## 刪除 socket file
@@ -46,17 +46,17 @@ app.listen('/tmp/express.sock');
 修改完的 code 長這樣
 
 ```js
-const fs = require('fs');
-const express = require('express');
+const fs = require("fs");
+const express = require("express");
 const app = express();
 
-app.get('/', (req, res) => {
-	res.send('Hello World\n');
+app.get("/", (req, res) => {
+  res.send("Hello World\n");
 });
-app.listen('/tmp/express.sock', console.log);
-process.on('SIGINT', () => {
-	fs.unlinkSync('/tmp/express.sock');
-	process.exit(0);
+app.listen("/tmp/express.sock", console.log);
+process.on("SIGINT", () => {
+  fs.unlinkSync("/tmp/express.sock");
+  process.exit(0);
 });
 ```
 

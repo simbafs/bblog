@@ -1,7 +1,7 @@
 ---
 title: React 解決中文輸入法
-publishDate: '2022-02-05'
-description: ''
+publishDate: "2022-02-05"
+description: ""
 tags:
   - react
   - js
@@ -62,11 +62,11 @@ compositionEnd <empty string>
 
 ```jsx
 <textarea
-	className={style.input}
-	value={t}
-	onChange={e => setInput(() => e.target.value)}
-	onCompositionUpdate={e => setInput(() => e.data)}
-	onContextMenu={handleContext}
+  className={style.input}
+  value={t}
+  onChange={(e) => setInput(() => e.target.value)}
+  onCompositionUpdate={(e) => setInput(() => e.data)}
+  onContextMenu={handleContext}
 />
 ```
 
@@ -79,14 +79,14 @@ compositionEnd <empty string>
 目前部份解決接續輸入的問題，但是只能從最後面繼續，不能從中間插入。目前的 `textarea` 長這樣
 
 ```jsx
-const [previousInput, setPreviousInput] = useState('');
+const [previousInput, setPreviousInput] = useState("");
 
 <textarea
-	className={style.input}
-	value={t}
-	onChange={e => setInput(() => e.target.value)}
-	onCompositionUpdate={e => setInput(() => previousInput + e.data)}
-	onCompositionStart={() => setPreviousInput(() => input)}
-	onContextMenu={handleContext}
+  className={style.input}
+  value={t}
+  onChange={(e) => setInput(() => e.target.value)}
+  onCompositionUpdate={(e) => setInput(() => previousInput + e.data)}
+  onCompositionStart={() => setPreviousInput(() => input)}
+  onContextMenu={handleContext}
 />;
 ```

@@ -1,7 +1,7 @@
 ---
 title: 震動 vs 振動
-publishDate: '2022-03-09'
-description: ''
+publishDate: "2022-03-09"
+description: ""
 tags:
   - other
 legacy: true

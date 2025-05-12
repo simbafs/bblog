@@ -1,7 +1,7 @@
 ---
 title: Day 05：是說，這個選項可以接什麼東西？autocomplete 與 auto-pair
-publishDate: '2021-09-05'
-description: ''
+publishDate: "2021-09-05"
+description: ""
 tags:
   - cli
   - terminal
@@ -76,8 +76,8 @@ alias a=b
 
 關於 alias 有兩點要注意
 
--   等號 `=` **左右不能有空白**
--   如果右邊有空白，要用引號 `'`、`"` 括起來
+- 等號 `=` **左右不能有空白**
+- 如果右邊有空白，要用引號 `'`、`"` 括起來
 
 ```zsh
 alias a=b    # O

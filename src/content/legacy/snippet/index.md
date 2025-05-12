@@ -1,7 +1,7 @@
 ---
 title: Python Snippet
-publishDate: '2023-02-23'
-description: ''
+publishDate: "2023-02-23"
+description: ""
 tags:
   - python
   - snippet

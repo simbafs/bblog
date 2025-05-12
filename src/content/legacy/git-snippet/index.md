@@ -1,7 +1,7 @@
 ---
 title: Git Snippet
-publishDate: '2023-02-20'
-description: ''
+publishDate: "2023-02-20"
+description: ""
 tags:
   - git
   - linux

@@ -1,7 +1,7 @@
 ---
 title: Pointer to Structure Passed to Interface
-publishDate: '2024-09-27'
-description: ''
+publishDate: "2024-09-27"
+description: ""
 tags:
   - pointer
   - interface

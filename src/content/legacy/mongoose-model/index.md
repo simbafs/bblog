@@ -1,7 +1,7 @@
 ---
 title: Mongoose Model
-publishDate: '2020-11-10'
-description: ''
+publishDate: "2020-11-10"
+description: ""
 tags:
   - mongoose
   - node
@@ -18,22 +18,25 @@ legacy: true
 這是這次實驗用的 code
 
 ```js
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 mongoose
-	.connect('mongodb://127.0.0.1:27017', { useNewUrlParser: true, useUnifiedTopology: true })
-	.then(() => console.log('Connected to DB'))
-	.catch(e => console.error(e));
+  .connect("mongodb://127.0.0.1:27017", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("Connected to DB"))
+  .catch((e) => console.error(e));
 
 const requiredString = {
-	type: String,
-	required: true,
+  type: String,
+  required: true,
 };
 const UserSchema = new mongoose.Schema({
-	username: requiredString,
-	password: requiredString,
+  username: requiredString,
+  password: requiredString,
 });
 
-const UserModel = mongoose.model('User', UserSchema);
+const UserModel = mongoose.model("User", UserSchema);
 ```
 
 mongo db 用 docker 開一個實驗用的 server

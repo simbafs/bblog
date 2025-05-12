@@ -1,7 +1,7 @@
 ---
 title: Firefox Event Listener Breakpoint
-publishDate: '2020-03-25'
-description: ''
+publishDate: "2020-03-25"
+description: ""
 tags:
   - js
   - frontend

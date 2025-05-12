@@ -1,7 +1,7 @@
 ---
 title: Gitignore
-publishDate: '2025-01-05'
-description: ''
+publishDate: "2025-01-05"
+description: ""
 tags:
   - gitignore
   - git

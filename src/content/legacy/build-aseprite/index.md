@@ -1,7 +1,7 @@
 ---
 title: Build Aseprite
-publishDate: '2023-04-15'
-description: ''
+publishDate: "2023-04-15"
+description: ""
 tags:
   - aseprite
   - pixel art

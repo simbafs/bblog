@@ -1,7 +1,7 @@
 ---
 title: Day 18：幫你的 HTML 開發裝上噴射引擎！vim-emmet
-publishDate: '2021-09-18'
-description: ''
+publishDate: "2021-09-18"
+description: ""
 tags:
   - cli
   - terminal
@@ -23,26 +23,26 @@ emmet-vim 是一套外掛程式，他可以解析一段字串，然後根據規�
 .tab>(tr#col$>td*3)*4 會被解析成
 
 <div class="tab">
-	<tr id="col1">
-		<td></td>
-		<td></td>
-		<td></td>
-	</tr>
-	<tr id="col2">
-		<td></td>
-		<td></td>
-		<td></td>
-	</tr>
-	<tr id="col3">
-		<td></td>
-		<td></td>
-		<td></td>
-	</tr>
-	<tr id="col4">
-		<td></td>
-		<td></td>
-		<td></td>
-	</tr>
+  <tr id="col1">
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr id="col2">
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr id="col3">
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr id="col4">
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
 </div>
 ```
 
@@ -122,21 +122,21 @@ h1+h2 ->
 div>span ->
 
 <div>
-	<span></span>
+  <span></span>
 </div>
 
 ------------ div>spam>h1>a ->
 
 <div>
-	<spam>
-		<h1><a href=""></a></h1>
-	</spam>
+  <spam>
+    <h1><a href=""></a></h1>
+  </spam>
 </div>
 
 ------------ div.main>h1.bg-green.bold>a ->
 
 <div class="main">
-	<h1 class="bg-green bold"><a href=""></a></h1>
+  <h1 class="bg-green bold"><a href=""></a></h1>
 </div>
 ```
 
@@ -148,8 +148,8 @@ div>span ->
 div>(h1+h2) ->
 
 <div>
-	<h1></h1>
-	<h2></h2>
+  <h1></h1>
+  <h2></h2>
 </div>
 ```
 
@@ -158,8 +158,9 @@ div>(h1+h2) ->
 有一個運算子名稱特別奇怪，他可以幫你產生假內容，還可以加數字指定假內容要有幾個單字
 
 ```html
-lorem -> Sit elit consectetur ullam eius aliquam repellat! Illo quaerat quisquam minima laboriosam fugit sunt Ex
-voluptas modi laboriosam commodi optio, sapiente. Quasi perferendis aliquam reprehenderit in praesentium Deserunt
+lorem -> Sit elit consectetur ullam eius aliquam repellat! Illo quaerat quisquam
+minima laboriosam fugit sunt Ex voluptas modi laboriosam commodi optio,
+sapiente. Quasi perferendis aliquam reprehenderit in praesentium Deserunt
 inventore natus. ------------ p>lorem4 ->
 
 <p>Lorem sunt esse odio?</p>

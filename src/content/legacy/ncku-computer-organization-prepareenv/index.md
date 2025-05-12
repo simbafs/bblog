@@ -1,7 +1,7 @@
 ---
 title: Preparing Environment
-publishDate: '2023-03-14'
-description: ''
+publishDate: "2023-03-14"
+description: ""
 tags:
   - note
   - riscv
@@ -98,4 +98,5 @@ $ spike --isa=RV64GC $RISCV/riscv64-unknown-linux-gnu/bin/pk /tmp/hello
 ```
 
 ## 參考資料
+
 上課 Homework 0 講義

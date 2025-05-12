@@ -1,7 +1,7 @@
 ---
 title: GPG
-publishDate: '2020-03-28'
-description: ''
+publishDate: "2020-03-28"
+description: ""
 tags:
   - git
   - linux

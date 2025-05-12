@@ -1,7 +1,7 @@
 ---
 title: Vim Auto Comment Plugin
-publishDate: '2020-08-25'
-description: ''
+publishDate: "2020-08-25"
+description: ""
 tags:
   - vim
   - auto

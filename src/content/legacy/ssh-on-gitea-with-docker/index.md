@@ -1,7 +1,7 @@
 ---
 title: ssh on gitea with docker
-publishDate: '2021-07-13'
-description: ''
+publishDate: "2021-07-13"
+description: ""
 tags:
   - gitea
   - ssh

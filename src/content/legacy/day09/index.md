@@ -1,7 +1,7 @@
 ---
 title: Day 09：今天又想不出標題了！tmux plugin 和 mouse mode
-publishDate: '2021-09-09'
-description: ''
+publishDate: "2021-09-09"
+description: ""
 tags:
   - cli
   - terminal
@@ -64,8 +64,8 @@ tmux 有自己內部的剪貼簿，不和 vim、作業系統共用
 而貼上的快捷鍵是 <kbd>CTRL</kbd><kbd>a</kbd> + <kbd>]</kbd>
 
 | ![tmux copy paste](tmux-copy-paste.gif) |
-| :-----------------------------------------------------------------------: |
-|                                 複製貼上                                  |
+| :-------------------------------------: |
+|                複製貼上                 |
 
 這個剪貼簿和 vim 的剪貼簿（到 vim 的章節會介紹）你可以交替使用，在命令模式（NORMAL）時用 vim 就不用切回編輯模式，在編輯模式（INSERT、REPLACE）時用 tmux 可以用用切到命令模式（這裡看不懂沒關係，我們會在講到 vim 剪貼簿時再講一次）
 

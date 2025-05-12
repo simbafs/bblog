@@ -1,7 +1,7 @@
 ---
 title: Firefox Touch Screen Scroll
-publishDate: '2021-05-08'
-description: ''
+publishDate: "2021-05-08"
+description: ""
 tags:
   - firefox
   - ubuntu

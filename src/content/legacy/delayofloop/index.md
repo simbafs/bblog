@@ -1,7 +1,7 @@
 ---
 title: 迴圈的延遲
-publishDate: '2022-05-18'
-description: ''
+publishDate: "2022-05-18"
+description: ""
 tags:
   - mindustry
   - game
@@ -15,9 +15,11 @@ legacy: true
 ## 單核
 
 <!-- ![single core](./singleCore.gif) -->
+
 > 圖片已損毀
 
 ## 多核
 
 <!-- ![four cores](./fourCores.gif) -->
+
 > 圖片已損毀

@@ -1,7 +1,7 @@
 ---
 title: Ts to Jsdoc
-publishDate: '2023-09-02'
-description: ''
+publishDate: "2023-09-02"
+description: ""
 tags:
   - js
 legacy: true
@@ -27,14 +27,14 @@ type List<T> = []T
 ## reducer
 
 ```ts
-const reducer = (state: number[], action: number) => [...state, action]
+const reducer = (state: number[], action: number) => [...state, action];
 ```
 
 is equivalent to
 
 ```js
 const reducer = (
-	/** @type {number[]} */ state,
-	/** @type {number} */ action
-) => [...state, action]
+  /** @type {number[]} */ state,
+  /** @type {number} */ action,
+) => [...state, action];
 ```

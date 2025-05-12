@@ -1,7 +1,7 @@
 ---
 title: Yubikey
-publishDate: '2022-04-19'
-description: ''
+publishDate: "2022-04-19"
+description: ""
 tags:
   - yubikey
   - ssh
@@ -33,11 +33,11 @@ legacy: true
 
 按照各個網站的說明設定，下面是我找到可以設定 Yubikey 的網站/APP
 
--   Google（我買這個 yubikey 最主要目的）
--   Github
--   twitter
--   facebook
--   heroku
+- Google（我買這個 yubikey 最主要目的）
+- Github
+- twitter
+- facebook
+- heroku
 
 twitter 在手機登入好像怪怪的，試了 5 分鐘才成功登入了
 
@@ -120,13 +120,13 @@ yubikey 的設定中有好幾份不同功能的密碼，用法和出現時機都
 
 ### 使用情境
 
--   驗證 PIN
--   改變 PIN
--   改變嘗試次數限制（還需要 management key）
--   簽章
--   解密
--   key agreement
--   取得資料
+- 驗證 PIN
+- 改變 PIN
+- 改變嘗試次數限制（還需要 management key）
+- 簽章
+- 解密
+- key agreement
+- 取得資料
 
 ## PUK
 
@@ -136,8 +136,8 @@ yubikey 的設定中有好幾份不同功能的密碼，用法和出現時機都
 
 ### 使用情境
 
--   修改 PUK
--   解鎖 PIN
+- 修改 PUK
+- 解鎖 PIN
 
 ## Admin PIN
 
@@ -150,12 +150,12 @@ yubikey 的設定中有好幾份不同功能的密碼，用法和出現時機都
 
 ### 使用情境
 
--   修改 management key
--   修改資料
--   產生新金鑰對
--   匯入密鑰
--   產生憑證
--   修改嘗試次數限制
+- 修改 management key
+- 修改資料
+- 產生新金鑰對
+- 匯入密鑰
+- 產生憑證
+- 修改嘗試次數限制
 
 以上內容是根據 [這篇文件](https://docs.yubico.com/yesdk/users-manual/application-piv/pin-puk-mgmt-key.html) 整理出來的
 

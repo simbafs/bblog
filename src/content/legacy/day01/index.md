@@ -1,7 +1,7 @@
 ---
 title: Day 01：前言，這批很純，快進來吧！
-publishDate: '2021-09-01'
-description: ''
+publishDate: "2021-09-01"
+description: ""
 tags:
   - cli
   - terminal
@@ -25,21 +25,21 @@ legacy: true
 
 現代化 IDE 提供的各種功能給我們很好的開發體驗，尤其是當程式碼數量逐漸增加時，IDE 可以提供像是自動補全、型態提示等等。當 [lsp(language server protocol)](https://docs.microsoft.com/zh-tw/visualstudio/extensibility/language-server-protocol?view=vs-2019) 開始流行之後，甚至不太需要查文件就能知道一個未知函數的用法。但是在這一切的方便的背後是犧牲有限的電腦資源換來的。這個時候資源需求少、發展越來越完善的的純文字界面就是解決這個問題的最佳方法了！不僅不會減少該有的**語法突顯**、**自動補全**，甚至可以借助 ssh 的力量，在**任何裝置**上開發（只要支援 ssh 都可以）。但是可惜的是網路上這方面的資源都很零散，於是我想說趁這次參賽將我所學整理起來。這個系列會帶領讀者一步一步建立一個好用、方便的 CLI 開發環境，如果有時間會講一下如何在任何裝置上開發（當然螢幕太小不適合啦）。
 
-| ![memory comsumption](mem-comsumption.png) |
-| :--------------------------------------------------------------------------: |
-|         五種文字編輯器開啟一個約 60 byte 的文字檔所消耗的記憶體（KB)         |
-|      From https://medium.com/commitlog/why-i-still-use-vim-67afd76b4db6      |
+|             ![memory comsumption](mem-comsumption.png)             |
+| :----------------------------------------------------------------: |
+|    五種文字編輯器開啟一個約 60 byte 的文字檔所消耗的記憶體（KB)    |
+| From https://medium.com/commitlog/why-i-still-use-vim-67afd76b4db6 |
 
 ## 這個系列在講什麼
 
 以下是預計的寫作進度，中途可能會更改，我也會每天在這裡更新連結
 
--   Day 01: 簡介
--   Day 02 ~ 05: zsh
--   Day 06 ~ 09: tmux
--   Day 10 ~ 21: nvim
--   Day 22 ~ 26: other tools
--   Day 29 ~ 30: coding everywhere
+- Day 01: 簡介
+- Day 02 ~ 05: zsh
+- Day 06 ~ 09: tmux
+- Day 10 ~ 21: nvim
+- Day 22 ~ 26: other tools
+- Day 29 ~ 30: coding everywhere
 
 ## ~~仙貝~~先備（軟體）
 

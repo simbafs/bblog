@@ -1,7 +1,7 @@
 ---
 title: OCR Add PDF Text Layer
-publishDate: '2023-05-19'
-description: ''
+publishDate: "2023-05-19"
+description: ""
 tags:
   - pdf
   - ocr
