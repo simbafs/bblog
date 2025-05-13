@@ -1,3 +1,10 @@
+---
+import { base } from "astro:config/client";
+import { join } from "path";
+
+const rss = join(base, "rss.xml");
+---
+
 <!-- NOTE: script 放前面是為了避免 <body> 上的 divide class 在 <footer> 最後面在加上 border，因為 CSS 會認為 <footer> 不是最後一個元素 -->
 <script>
   class RandomWalker {
@@ -37,7 +44,6 @@
 
   const cpuEle = document.getElementById("cpu");
   const memEle = document.getElementById("mem");
-  const loadEle = document.getElementById("load");
 
   let now = new Date();
   const cpu = new RandomWalker(
@@ -49,31 +55,25 @@
     cpuEle,
   );
   const mem = new RandomWalker(
-    512,
-    128,
-    3192,
-    1024,
-    (rw) => `${rw.value.toFixed(0)}MB / 4096MB`,
+    10,
+    10,
+    50,
+    5,
+    (rw) => `${rw.value.toFixed(0)}%`,
     memEle,
-  );
-  const load = new RandomWalker(
-    0.12,
-    0.5,
-    0.8,
-    0.01,
-    (rw) => rw.value.toFixed(2),
-    loadEle,
   );
 
   function update() {
     now = new Date();
     cpu.update();
     mem.update();
-    load.update();
 
     const timeEle = document.getElementById("current-time");
     if (timeEle) {
-      timeEle.textContent = now.toLocaleTimeString();
+      const hour = now.getHours().toFixed(0).padStart(2, "0");
+      const minute = now.getMinutes().toFixed(0).padStart(2, "0");
+      const second = now.getSeconds().toFixed(0).padStart(2, "0");
+      timeEle.textContent = `${hour}:${minute}:${second}`;
     }
   }
 
@@ -82,10 +82,17 @@
 <footer
   class="flex flex-col items-center justify-between p-2 text-sm sm:flex-row"
 >
-  <div id="current-time" class="font-bold">--:--:--</div>
+  <div>
+    <a href={rss} class="text-terminal-accent font-bold" target="_blank">RSS</a>
+    <a
+      href="https://github.com/simbafs"
+      class="text-terminal-accent font-bold"
+      target="_blank">GitHub</a
+    >
+  </div>
   <div class="text-terminal-accent *:text-terminal-secondary font-bold">
-    CPU: <span id="cpu">3%</span> Mem:
-    <span id="mem">512MB / 4096MB</span>
-    Load: <span id="load">0.12</span>
+    CPU: <span id="cpu" class="text-terminal-tertiary">3%</span>
+    Mem: <span id="mem" class="text-terminal-tertiary">10%</span>
+    <span id="current-time" class="text-terminal-secondary">--:--:--</span>
   </div>
 </footer>
