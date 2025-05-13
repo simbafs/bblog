@@ -1,4 +1,5 @@
 ---
+import { join } from "path";
 import { base } from "astro:config/client";
 
 import { config } from "../../site.config";
@@ -14,20 +15,55 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const { title, description /* , image = '/blog-placeholder-1.jpg' */ } =
   Astro.props;
+
+function withBase(path: string) {
+  return join(base, path);
+}
 ---
 
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
-<link rel="sitemap" href={`${base}/sitemap-index.xml`} />
+<link rel="sitemap" href={withBase("sitemap-index.xml")} />
 <link
   rel="alternate"
   type="application/rss+xml"
   title={config.title}
-  href={`${base}/rss.xml`}
+  href={withBase("rss.xml")}
 />
 <meta name="generator" content={Astro.generator} />
+
+<!-- Favicon -->
+<link
+  rel="icon"
+  type="image/png"
+  sizes="16x16"
+  href={withBase("/favicon/favicon-16x16.png")}
+/>
+<link
+  rel="icon"
+  type="image/png"
+  sizes="32x32"
+  href={withBase("/favicon/favicon-32x32.png")}
+/>
+<link rel="icon" href={withBase("/favicon/favicon.ico")} />
+
+<!-- Android Chrome -->
+<link
+  rel="icon"
+  type="image/png"
+  sizes="192x192"
+  href={withBase("/favicon/android-chrome-192x192.png")}
+/>
+<link
+  rel="icon"
+  type="image/png"
+  sizes="512x512"
+  href={withBase("/favicon/android-chrome-512x512.png")}
+/>
+
+<!-- Apple Touch Icon -->
+<link rel="apple-touch-icon" href={withBase("/favicon/apple-touch-icon.png")} />
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
