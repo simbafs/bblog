@@ -41,8 +41,8 @@ const links = years.map((year) => ({
     <p>$ blog tree --year {year}</p>
     <div>
       {
-        posts.map((post, index) => (
-          <TreeElement isLast={index == posts.length - 1}>
+        posts.map((post) => (
+          <TreeElement>
             <PostPreview {...post} />
           </TreeElement>
         ))

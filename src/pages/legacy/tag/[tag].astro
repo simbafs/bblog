@@ -30,8 +30,8 @@ const links = tags.map((tag) => ({
   <p>$ blog tree --legacy --tag {tag.includes(" ") ? `'${tag}'` : tag}</p>
   <div>
     {
-      posts.map((post, index) => (
-        <TreeElement isLast={index === posts.length - 1}>
+      posts.map((post) => (
+        <TreeElement>
           <PostPreview {...post} />
         </TreeElement>
       ))
