@@ -6,6 +6,9 @@ import sitemap from "@astrojs/sitemap";
 import mdx from "@astrojs/mdx";
 import pagefind from "astro-pagefind";
 
+// rehype plugins
+import rehypeExternalLinks from "rehype-external-links";
+
 // vite plugins
 import tailwindcss from "@tailwindcss/vite";
 
@@ -17,5 +20,14 @@ export default defineConfig({
 
   vite: {
     plugins: [tailwindcss()],
+  },
+
+  markdown: {
+    rehypePlugins: [
+      [
+        rehypeExternalLinks,
+        { target: "_blank", rel: "noopener external nofollow" },
+      ],
+    ],
   },
 });
