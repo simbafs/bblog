@@ -1,89 +1,33 @@
 ---
-import { Image } from "astro:assets";
-
 import Layout from "../layouts/Layout.astro";
 import TreeElement from "../components/TreeElement.astro";
+import A from "../components/A.astro";
 
-import avatar from "../assests/avatar.png";
-
-const info = [
-  { title: "所在地", content: "臺南" },
-  { title: "學校", content: "成大物理系" },
-  { title: "寵物", content: "花生（橘白貓）" },
-  { title: "電腦", content: "Framwork Laptop 13 AMD 7040 Series" },
-  { title: "作業系統", content: "Arch Linux + KDE Plasma" },
-  { title: "編輯器", content: "NeoVim" },
-  { title: "瀏覽器", content: "Firefox" },
+const links: [string, string, string][] = [
+  ["About", "/about/", "關於我"],
+  ["Blog", "/blog/", "部落格"],
+  ["Legacy Blog", "/legacy/", "舊部落格（沒整理過得文章）"],
+  ["Search", "/search/", "搜尋"],
+  ["GitHub", "https://github.com/simbafs", "GitHub"],
+  ["Telegram", "https://t.me/simbafs", "Telegram"],
 ];
 ---
 
 <Layout>
-  <p>$ neofetch</p>
-  <div class="flex flex-col gap-4 md:flex-row">
-    <div class="w-1/2 md:w-1/3">
-      <Image
-        src={avatar}
-        alt="avatar of SimbaFs"
-        class="border-terminal-tertiary rounded-full border-2 p-1"
-      />
-    </div>
-    <div>
-      <p>
-        <span class="text-terminal-tertiary font-bold">me</span>@<span
-          class="text-terminal-tertiary font-bold">simbafs.cc</span
-        >
-      </p>
-      <p>----------------</p>
-      <!-- NOTE: 也許在這裡加一個簡單的介紹 -->
-      {
-        info.map((item) => (
-          <p>
-            <span class="text-terminal-tertiary font-bold">{item.title}</span>：
-            {item.content}
-          </p>
-        ))
-      }
-    </div>
-  </div>
-  <br />
-
-  <p>$ find ./comminuties -name SimbaFs</p>
+  <p>$ tree .</p>
   <div>
-    <TreeElement density="compact">
-      <p>SITCON</p>
-      <TreeElement density="compact">2025 製播組</TreeElement>
-      <TreeElement density="compact">2024 製播組、開發組</TreeElement>
-      <TreeElement density="compact">2025 場務組</TreeElement>
-    </TreeElement>
-    <TreeElement density="compact">
-      <p>SITCON HoC</p>
-      <TreeElement density="compact">2022 臺南、高雄場助教</TreeElement>
-      <TreeElement density="compact">2021 臺南場助教</TreeElement>
-      <TreeElement density="compact">2019 新北場助教</TreeElement>
-    </TreeElement>
-    <TreeElement density="compact">
-      <p>COSCUP</p>
-      <TreeElement density="compact">2023 製播組</TreeElement>
-    </TreeElement>
+    {
+      links.map(([name, link, description]) => (
+        <TreeElement>
+          <A
+            href={link}
+            class="text-xl font-bold underline underline-offset-2 transition-all hover:underline-offset-1"
+          >
+            {name}
+          </A>
+          <p>{description}</p>
+        </TreeElement>
+      ))
+    }
   </div>
-  <br />
-
-  <p>$ ability --frontend</p>
-  <div>
-    <TreeElement density="compact"><p>ReactJS</p></TreeElement>
-    <TreeElement density="compact"><p>TailwindCSS</p></TreeElement>
-    <TreeElement density="compact"><p>AstroJS</p></TreeElement>
-    <TreeElement density="compact"><p>NextJS</p></TreeElement>
-  </div>
-  <br />
-
-  <p>$ ability --backend</p>
-  <div>
-    <TreeElement density="compact"><p>NodeJS</p></TreeElement>
-    <TreeElement density="compact"><p>ExpressJS</p></TreeElement>
-    <TreeElement density="compact"><p>Go</p></TreeElement>
-    <TreeElement density="compact"><p>Gin</p></TreeElement>
-    <TreeElement density="compact"><p>Entgo</p></TreeElement>
-  </div>
-  <br />
 </Layout>

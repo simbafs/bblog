@@ -6,7 +6,24 @@ import path from "path";
 type Props = HTMLAttributes<"a">;
 const { href, ...props } = Astro.props;
 
-const link = path.join(base, String(href));
+const external = String(href).startsWith("http");
+const link = external ? href : path.join(base, String(href));
 ---
 
-<a href={link} {...props}><slot /></a>
+{
+  external ? (
+    <a
+      href={link}
+      target="_blank"
+      rel="noopener noreferrer nofollow"
+      {...props}
+    >
+      <slot />
+      <i class="fa fa-external-link ml-2" aria-hidden="true" />
+    </a>
+  ) : (
+    <a href={link} {...props}>
+      <slot />
+    </a>
+  )
+}

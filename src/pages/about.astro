@@ -1,0 +1,103 @@
+---
+import { Image } from "astro:assets";
+
+import Layout from "../layouts/Layout.astro";
+import TreeElement from "../components/TreeElement.astro";
+
+import avatar from "../assests/avatar.png";
+
+const info = [
+  { title: "所在地", content: "臺南" },
+  { title: "學校", content: "成大物理系" },
+  { title: "寵物", content: "花生（橘白貓）" },
+  { title: "電腦", content: "Framwork Laptop 13 AMD 7040 Series" },
+  { title: "作業系統", content: "Arch Linux + KDE Plasma" },
+  { title: "編輯器", content: "NeoVim" },
+  { title: "瀏覽器", content: "Firefox" },
+];
+
+type Tree = [string, string[]][];
+
+const communities: Tree = [
+  ["SITCON", ["2025 製播組", "2024 製播組、開發組", "2022 場務組"]],
+  [
+    "SITCON HoC",
+    ["2022 臺南、高雄場助教", "2021 臺南場助教", "2019 新北場助教"],
+  ],
+  ["COSCUP", ["2023 製播組"]],
+];
+const frontend: string[] = ["ReactJS", "TailwindCSS", "AstroJS", "NextJS"];
+const backend: string[] = ["NodeJS", "ExpressJS", "Go", "Gin", "Entgo"];
+---
+
+<Layout title="About Me">
+  <p>$ neofetch</p>
+  <div class="flex flex-col gap-4 md:flex-row">
+    <div class="w-1/2 md:w-1/3">
+      <Image
+        src={avatar}
+        alt="avatar of SimbaFs"
+        class="border-terminal-tertiary rounded-full border-2 p-1"
+      />
+    </div>
+    <div>
+      <p>
+        <span class="text-terminal-tertiary font-bold">me</span>@<span
+          class="text-terminal-tertiary font-bold">simbafs.cc</span
+        >
+      </p>
+      <p>----------------</p>
+      <!-- NOTE: 也許在這裡加一個簡單的介紹 -->
+      {
+        info.map((item) => (
+          <p>
+            <span class="text-terminal-tertiary font-bold">{item.title}</span>：{" "}
+            {item.content}{" "}
+          </p>
+        ))
+      }
+    </div>
+  </div>
+  <br />
+
+  <p>$ find ./community -name SimbaFs</p>
+  <div>
+    {
+      communities.map(([name, members]) => (
+        <TreeElement density="compact">
+          <h2 class="text-xl font-bold">{name}</h2>
+          {members.map((member) => (
+            <TreeElement density="compact">
+              <p>{member}</p>
+            </TreeElement>
+          ))}
+        </TreeElement>
+      ))
+    }
+  </div>
+  <br />
+
+  <p>$ ability --frontend</p>
+  <div>
+    {
+      frontend.map((item) => (
+        <TreeElement density="compact">
+          <p>{item}</p>
+        </TreeElement>
+      ))
+    }
+  </div>
+  <br />
+
+  <p>$ ability --backend</p>
+  <div>
+    {
+      backend.map((item) => (
+        <TreeElement density="compact">
+          <p>{item}</p>
+        </TreeElement>
+      ))
+    }
+  </div>
+  <br />
+</Layout>
